@@ -44,7 +44,6 @@ public class ObjectFactory {
                 .price(BigDecimal.TEN)
                 .description("Coca-Cola")
                 .vehicleTypeEntity(vehicleTypeEntity)
-                .brandEntity(brandEntity)
                 .modelEntity(modelEntity)
                 .build();
     }
@@ -57,7 +56,6 @@ public class ObjectFactory {
                 .price(BigDecimal.TEN)
                 .description("Coca-Cola")
                 .vehicleTypeEntity(vehicleTypeEntity)
-                .brandEntity(brandEntity)
                 .modelEntity(modelEntity)
                 .build();
     }
@@ -70,7 +68,6 @@ public class ObjectFactory {
                 .price(BigDecimal.TEN)
                 .description("Coca-Cola")
                 .vehicleTypeEntity(vehicleTypeEntity)
-                .brandEntity(brandEntity)
                 .modelEntity(modelEntity)
                 .build();
     }

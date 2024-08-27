@@ -80,14 +80,6 @@ public class VehicleEntity extends AuditDomain {
             example = "1", ref = "RestaurantEntity")
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "brand_id")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private BrandEntity brandEntity;
-
-    @Schema(description = "Restaurant of the User.",
-            example = "1", ref = "RestaurantEntity")
-    @NotNull
-    @ManyToOne
     @JoinColumn(name = "model_id")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private ModelEntity modelEntity;
@@ -107,7 +99,6 @@ public class VehicleEntity extends AuditDomain {
         this.description = vehicleEntity.getDescription();
         this.price = vehicleEntity.getPrice();
         this.vehicleTypeEntity = vehicleEntity.getVehicleTypeEntity();
-        this.brandEntity = vehicleEntity.getBrandEntity();
         this.modelEntity = vehicleEntity.getModelEntity();
         this.vehicleStatus = vehicleEntity.getVehicleStatus();
     }

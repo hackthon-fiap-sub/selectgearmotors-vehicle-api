@@ -94,7 +94,6 @@ class VehicleServiceTest {
                 .price(BigDecimal.TEN)
                 .description("Coca-Cola")
                 .vehicleTypeEntity(VehicleTypeEntity)
-                .brandEntity(brandEntity)
                 .modelEntity(modelEntity)
                 .build();
     }
@@ -107,7 +106,6 @@ class VehicleServiceTest {
                 .price(BigDecimal.TEN)
                 .description("Coca-Cola")
                 .vehicleTypeEntity(VehicleTypeEntity)
-                .brandEntity(brandEntity)
                 .modelEntity(modelEntity)
                 .build();
     }
@@ -120,7 +118,6 @@ class VehicleServiceTest {
                 .price(BigDecimal.TEN)
                 .description("Coca-Cola")
                 .vehicleTypeEntity(VehicleTypeEntity)
-                .brandEntity(brandEntity)
                 .modelEntity(modelEntity)
                 .build();
     }

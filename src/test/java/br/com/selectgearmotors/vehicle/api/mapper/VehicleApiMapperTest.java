@@ -27,7 +27,6 @@ public class VehicleApiMapperTest {
         request.setDescription("Description");
         request.setPrice(new BigDecimal("10000"));
         request.setVehicleTypeId(1L);
-        request.setBrandId(2L);
         request.setModelId(3L);
         request.setVehicleStatus("ACTIVE");
 
@@ -42,7 +41,6 @@ public class VehicleApiMapperTest {
         assertEquals(request.getDescription(), vehicle.getDescription());
         assertEquals(request.getPrice(), vehicle.getPrice());
         assertEquals(request.getVehicleTypeId(), vehicle.getVehicleTypeId());
-        assertEquals(request.getBrandId(), vehicle.getBrandId());
         assertEquals(request.getModelId(), vehicle.getModelId());
         assertEquals(request.getVehicleStatus(), vehicle.getVehicleStatus());
     }
@@ -76,7 +74,6 @@ public class VehicleApiMapperTest {
         assertEquals(vehicle.getDescription(), response.getDescription());
         assertEquals(vehicle.getPrice(), response.getPrice());
         assertEquals(vehicle.getVehicleTypeId(), response.getVehicleTypeEntity().getId());
-        assertEquals(vehicle.getBrandId(), response.getBrandEntity().getId());
         assertEquals(vehicle.getModelId(), response.getModelEntity().getId());
         assertEquals(vehicle.getVehicleStatus(), response.getVehicleStatus());
     }
@@ -128,7 +125,6 @@ public class VehicleApiMapperTest {
         assertEquals(vehicle1.getDescription(), responseList.get(0).getDescription());
         assertEquals(vehicle1.getPrice(), responseList.get(0).getPrice());
         assertEquals(vehicle1.getVehicleTypeId(), responseList.get(0).getVehicleTypeEntity().getId());
-        assertEquals(vehicle1.getBrandId(), responseList.get(0).getBrandEntity().getId());
         assertEquals(vehicle1.getModelId(), responseList.get(0).getModelEntity().getId());
         assertEquals(vehicle1.getVehicleStatus(), responseList.get(0).getVehicleStatus());
 
@@ -140,7 +136,6 @@ public class VehicleApiMapperTest {
         assertEquals(vehicle2.getDescription(), responseList.get(1).getDescription());
         assertEquals(vehicle2.getPrice(), responseList.get(1).getPrice());
         assertEquals(vehicle2.getVehicleTypeId(), responseList.get(1).getVehicleTypeEntity().getId());
-        assertEquals(vehicle2.getBrandId(), responseList.get(1).getBrandEntity().getId());
         assertEquals(vehicle2.getModelId(), responseList.get(1).getModelEntity().getId());
         assertEquals(vehicle2.getVehicleStatus(), responseList.get(1).getVehicleStatus());
     }

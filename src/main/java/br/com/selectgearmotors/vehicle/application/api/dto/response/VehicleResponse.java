@@ -70,14 +70,6 @@ public class VehicleResponse implements Serializable {
             example = "1", ref = "RestaurantEntity")
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "brand_id")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private BrandEntity brandEntity;
-
-    @Schema(description = "Restaurant of the User.",
-            example = "1", ref = "RestaurantEntity")
-    @NotNull
-    @ManyToOne
     @JoinColumn(name = "model_id")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private ModelEntity modelEntity;

@@ -46,8 +46,7 @@ public class VehicleMapperTest {
         assertEquals(vehicle.getPrice(), entity.getPrice());
         assertEquals(vehicle.getPic(), entity.getPic());
         assertEquals(vehicle.getVehicleTypeId(), entity.getVehicleTypeEntity().getId());
-        assertEquals(vehicle.getBrandId(), entity.getBrandEntity().getId());
-        assertEquals(vehicle.getModelId(), entity.getBrandEntity().getId());
+        assertEquals(vehicle.getModelId(), entity.getModelEntity().getId());
         assertEquals(vehicle.getVehicleStatus(), entity.getVehicleStatus());
     }
 
@@ -61,8 +60,7 @@ public class VehicleMapperTest {
         entity.setPrice(new BigDecimal("10000"));
         entity.setPic("pic.jpg");
         entity.setVehicleTypeEntity(new VehicleTypeEntity(1L, "Type"));
-        entity.setBrandEntity(new BrandEntity(2L, "Brand"));
-        entity.setModelEntity(new ModelEntity(3L, "Model"));
+        entity.setModelEntity(new ModelEntity(3L, "Model", new BrandEntity(2L, "Brand")));
         entity.setVehicleStatus(VehicleStatus.AVAILABLE);
 
         // Act
@@ -76,7 +74,6 @@ public class VehicleMapperTest {
         assertEquals(entity.getPrice(), vehicle.getPrice());
         assertEquals(entity.getPic(), vehicle.getPic());
         assertEquals(entity.getVehicleTypeEntity().getId(), vehicle.getVehicleTypeId());
-        assertEquals(entity.getBrandEntity().getId(), vehicle.getBrandId());
         assertEquals(entity.getModelEntity().getId(), vehicle.getModelId());
         assertEquals(entity.getVehicleStatus(), vehicle.getVehicleStatus());
     }
@@ -91,8 +88,7 @@ public class VehicleMapperTest {
         entity1.setPrice(new BigDecimal("10000"));
         entity1.setPic("pic1.jpg");
         entity1.setVehicleTypeEntity(new VehicleTypeEntity(1L, "Type1"));
-        entity1.setBrandEntity(new BrandEntity(2L, "Brand1"));
-        entity1.setModelEntity(new ModelEntity(3L, "Model1"));
+        entity1.setModelEntity(new ModelEntity(3L, "Model1", new BrandEntity(2L, "Brand1")));
         entity1.setVehicleStatus(VehicleStatus.AVAILABLE);
 
         VehicleEntity entity2 = new VehicleEntity();
@@ -102,8 +98,7 @@ public class VehicleMapperTest {
         entity2.setPrice(new BigDecimal("20000"));
         entity2.setPic("pic2.jpg");
         entity2.setVehicleTypeEntity(new VehicleTypeEntity(4L, "Type2"));
-        entity2.setBrandEntity(new BrandEntity(5L, "Brand2"));
-        entity2.setModelEntity(new ModelEntity(6L, "Model2"));
+        entity2.setModelEntity(new ModelEntity(6L, "Model2", new BrandEntity(5L, "Brand2")));
         entity2.setVehicleStatus(VehicleStatus.RESERVED);
 
         List<VehicleEntity> entityList = new ArrayList<>();
@@ -122,7 +117,6 @@ public class VehicleMapperTest {
         assertEquals(entity1.getPrice(), vehicleList.get(0).getPrice());
         assertEquals(entity1.getPic(), vehicleList.get(0).getPic());
         assertEquals(entity1.getVehicleTypeEntity().getId(), vehicleList.get(0).getVehicleTypeId());
-        assertEquals(entity1.getBrandEntity().getId(), vehicleList.get(0).getBrandId());
         assertEquals(entity1.getModelEntity().getId(), vehicleList.get(0).getModelId());
         assertEquals(entity1.getVehicleStatus(), vehicleList.get(0).getVehicleStatus());
 
@@ -132,7 +126,6 @@ public class VehicleMapperTest {
         assertEquals(entity2.getPrice(), vehicleList.get(1).getPrice());
         assertEquals(entity2.getPic(), vehicleList.get(1).getPic());
         assertEquals(entity2.getVehicleTypeEntity().getId(), vehicleList.get(1).getVehicleTypeId());
-        assertEquals(entity2.getBrandEntity().getId(), vehicleList.get(1).getBrandId());
         assertEquals(entity2.getModelEntity().getId(), vehicleList.get(1).getModelId());
         assertEquals(entity2.getVehicleStatus(), vehicleList.get(1).getVehicleStatus());
     }

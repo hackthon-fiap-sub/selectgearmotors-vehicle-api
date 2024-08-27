@@ -18,7 +18,6 @@ public interface VehicleApiMapper {
     @Mapping(source = "description", target = "description")
     @Mapping(source = "price", target = "price")
     @Mapping(source = "vehicleTypeId", target = "vehicleTypeId")
-    @Mapping(source = "brandId", target = "brandId")
     @Mapping(source = "modelId", target = "modelId")
     @Mapping(source = "vehicleStatus", target = "vehicleStatus")
     Vehicle fromRequest(VehicleRequest request);

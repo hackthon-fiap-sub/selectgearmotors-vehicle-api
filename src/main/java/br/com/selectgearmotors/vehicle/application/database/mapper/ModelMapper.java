@@ -12,10 +12,12 @@ import java.util.List;
 public interface ModelMapper {
 
     @Mapping(source = "name", target = "name")
+    @Mapping(source = "brandId", target = "brandEntity.id")
     ModelEntity fromModelToEntity(Model brand);
 
     @InheritInverseConfiguration
     @Mapping(target = "id", source = "id")
+    @Mapping(target = "brandId", source = "brandEntity.id")
     Model fromEntityToModel(ModelEntity brandEntity);
     List<Model> map(List<ModelEntity> brandEntities);
 }

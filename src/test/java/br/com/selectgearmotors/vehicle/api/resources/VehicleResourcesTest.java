@@ -9,6 +9,7 @@ import br.com.selectgearmotors.vehicle.core.domain.VehicleType;
 import br.com.selectgearmotors.vehicle.core.service.ModelService;
 import br.com.selectgearmotors.vehicle.core.service.VehicleTypeService;
 import br.com.selectgearmotors.vehicle.core.service.BrandService;
+import br.com.selectgearmotors.vehicle.infrastructure.entity.model.ModelEntity;
 import br.com.selectgearmotors.vehicle.infrastructure.entity.vehicle.VehicleEntity;
 import br.com.selectgearmotors.vehicle.infrastructure.entity.vehicletype.VehicleTypeEntity;
 import br.com.selectgearmotors.vehicle.infrastructure.entity.brand.BrandEntity;
@@ -160,8 +161,7 @@ class VehicleResourcesTest {
 
     private VehicleEntity getVehicleEntity(Long vehicleTypeId, Long brandId, Long modelId) {
         Optional<VehicleTypeEntity> vehicleTypeById = vehicleTypeRepository.findById(vehicleTypeId);
-        Optional<BrandEntity> brandById = brandRepository.findById(brandId);
-
+        Optional<ModelEntity> modelById = modelRepository.findById(brandId);
 
         return VehicleEntity.builder()
                 .cor(faker.commerce().color())
@@ -169,7 +169,7 @@ class VehicleResourcesTest {
                 .price(BigDecimal.valueOf(faker.number().randomDouble(2, 1, 100)))
                 .description(faker.lorem().sentence())
                 .vehicleTypeEntity(vehicleTypeById.isPresent() ? vehicleTypeById.get() : null)
-                .brandEntity(brandById.isPresent() ? brandById.get() : null)
+                .modelEntity(modelById.isPresent() ? modelById.get() : null)
                 .build();
     }
 

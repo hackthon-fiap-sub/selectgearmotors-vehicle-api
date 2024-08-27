@@ -16,7 +16,7 @@ public class VehicleEntityTest {
     @Test
     public void testConstructor() {
         // Arrange & Act
-        VehicleEntity entity = new VehicleEntity(1L, "V123", "Red", "pic.jpg", 2022, "Description", new BigDecimal("10000"), new VehicleTypeEntity(), new BrandEntity(), new ModelEntity(), VehicleStatus.AVAILABLE);
+        VehicleEntity entity = new VehicleEntity(1L, "V123", "Red", "pic.jpg", 2022, "Description", new BigDecimal("10000"), new VehicleTypeEntity(1L, "Automotor"), new ModelEntity(1L, "Flex", new BrandEntity(1L, "Ford")), VehicleStatus.AVAILABLE);
 
         // Assert
         assertEquals(1L, entity.getId());
@@ -27,7 +27,6 @@ public class VehicleEntityTest {
         assertEquals("Description", entity.getDescription());
         assertEquals(new BigDecimal("10000"), entity.getPrice());
         assertNotNull(entity.getVehicleTypeEntity());
-        assertNotNull(entity.getBrandEntity());
         assertNotNull(entity.getModelEntity());
         assertEquals(VehicleStatus.AVAILABLE, entity.getVehicleStatus());
     }
@@ -46,7 +45,6 @@ public class VehicleEntityTest {
         entity.setDescription("Description");
         entity.setPrice(new BigDecimal("10000"));
         entity.setVehicleTypeEntity(new VehicleTypeEntity());
-        entity.setBrandEntity(new BrandEntity());
         entity.setModelEntity(new ModelEntity());
         entity.setVehicleStatus(VehicleStatus.AVAILABLE);
 
@@ -59,7 +57,6 @@ public class VehicleEntityTest {
         assertEquals("Description", entity.getDescription());
         assertEquals(new BigDecimal("10000"), entity.getPrice());
         assertNotNull(entity.getVehicleTypeEntity());
-        assertNotNull(entity.getBrandEntity());
         assertNotNull(entity.getModelEntity());
         assertEquals(VehicleStatus.AVAILABLE, entity.getVehicleStatus());
     }
@@ -67,7 +64,7 @@ public class VehicleEntityTest {
     @Test
     public void testToString() {
         // Arrange
-        VehicleEntity entity = new VehicleEntity(1L, "V123", "Red", "pic.jpg", 2022, "Description", new BigDecimal("10000"), new VehicleTypeEntity(), new BrandEntity(), new ModelEntity(), VehicleStatus.AVAILABLE);
+        VehicleEntity entity = new VehicleEntity(1L, "V123", "Red", "pic.jpg", 2022, "Description", new BigDecimal("10000"), new VehicleTypeEntity(1L, "Automotor"), new ModelEntity(1L, "Flex", new BrandEntity(1L, "Ford")), VehicleStatus.AVAILABLE);
 
         // Act
         String toString = entity.toString();
@@ -88,8 +85,8 @@ public class VehicleEntityTest {
     @Test
     public void testHashCode() {
         // Arrange
-        VehicleEntity entity1 = new VehicleEntity(1L, "V123", "Red", "pic.jpg", 2022, "Description", new BigDecimal("10000"), new VehicleTypeEntity(), new BrandEntity(), new ModelEntity(), VehicleStatus.AVAILABLE);
-        VehicleEntity entity2 = new VehicleEntity(1L, "V123", "Red", "pic.jpg", 2022, "Description", new BigDecimal("10000"), new VehicleTypeEntity(), new BrandEntity(), new ModelEntity(), VehicleStatus.AVAILABLE);
+        VehicleEntity entity1 = new VehicleEntity(1L, "V123", "Red", "pic.jpg", 2022, "Description", new BigDecimal("10000"), new VehicleTypeEntity(1L, "Automotor"), new ModelEntity(1L, "Flex", new BrandEntity(1L, "Ford")), VehicleStatus.AVAILABLE);
+        VehicleEntity entity2 = new VehicleEntity(1L, "V123", "Red", "pic.jpg", 2022, "Description", new BigDecimal("10000"), new VehicleTypeEntity(1L, "Automotor"), new ModelEntity(1L, "Flex", new BrandEntity(1L, "Ford")), VehicleStatus.AVAILABLE);
 
         // Act & Assert
         assertEquals(entity1.hashCode(), entity2.hashCode());
@@ -98,9 +95,9 @@ public class VehicleEntityTest {
     @Test
     public void testEquals() {
         // Arrange
-        VehicleEntity entity1 = new VehicleEntity(1L, "V123", "Red", "pic.jpg", 2022, "Description", new BigDecimal("10000"), new VehicleTypeEntity(), new BrandEntity(), new ModelEntity(), VehicleStatus.AVAILABLE);
-        VehicleEntity entity2 = new VehicleEntity(1L, "V123", "Red", "pic.jpg", 2022, "Description", new BigDecimal("10000"), new VehicleTypeEntity(), new BrandEntity(), new ModelEntity(), VehicleStatus.AVAILABLE);
-        VehicleEntity entity3 = new VehicleEntity(2L, "V124", "Blue", "pic2.jpg", 2023, "Description2", new BigDecimal("20000"), new VehicleTypeEntity(), new BrandEntity(), new ModelEntity(), VehicleStatus.AVAILABLE);
+        VehicleEntity entity1 = new VehicleEntity(1L, "V123", "Red", "pic.jpg", 2022, "Description", new BigDecimal("10000"), new VehicleTypeEntity(1L, "Automotor"), new ModelEntity(1L, "Flex", new BrandEntity(1L, "Ford")), VehicleStatus.AVAILABLE);
+        VehicleEntity entity2 = new VehicleEntity(1L, "V123", "Red", "pic.jpg", 2022, "Description", new BigDecimal("10000"), new VehicleTypeEntity(1L, "Automotor"), new ModelEntity(1L, "Flex", new BrandEntity(1L, "Ford")), VehicleStatus.AVAILABLE);
+        VehicleEntity entity3 = new VehicleEntity(2L, "V123", "Red", "pic.jpg", 2022, "Description", new BigDecimal("10000"), new VehicleTypeEntity(1L, "Automotor"), new ModelEntity(1L, "Flex", new BrandEntity(1L, "Ford")), VehicleStatus.AVAILABLE);
 
         // Act & Assert
         assertEquals(entity1, entity2);

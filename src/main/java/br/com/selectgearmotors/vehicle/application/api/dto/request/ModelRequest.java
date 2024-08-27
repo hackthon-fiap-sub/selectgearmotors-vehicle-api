@@ -26,4 +26,8 @@ public class ModelRequest implements Serializable {
             example = "Seven Food")
     @Size(min = 3, max = 255)
     private String name;
+
+    @Schema(description = "Name of the Model.",
+            example = "Seven Food")
+    private Long brandId;
 }

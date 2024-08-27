@@ -62,7 +62,6 @@ class VehicleRepositoryAdapterTest {
                 .price(BigDecimal.TEN)
                 .description("Coca-Cola")
                 .vehicleTypeEntity(vehicleTypeEntity)
-                .brandEntity(brandEntity)
                 .modelEntity(modelEntity)
                 .build();
     }
@@ -75,7 +74,6 @@ class VehicleRepositoryAdapterTest {
                 .price(BigDecimal.TEN)
                 .description("Coca-Cola")
                 .vehicleTypeEntity(vehicleTypeEntity)
-                .brandEntity(brandEntity)
                 .modelEntity(modelEntity)
                 .build();
     }
@@ -88,7 +86,6 @@ class VehicleRepositoryAdapterTest {
                 .price(BigDecimal.TEN)
                 .description("Coca-Cola")
                 .vehicleTypeEntity(vehicleTypeEntity)
-                .brandEntity(brandEntity)
                 .modelEntity(modelEntity)
                 .build();
     }
@@ -132,9 +129,14 @@ class VehicleRepositoryAdapterTest {
                 .build();
     }
 
-
     private VehicleTypeEntity getVehicleTypeEntity() {
         return VehicleTypeEntity.builder()
+                .name("Bebida")
+                .build();
+    }
+
+    private ModelEntity getModelEntity() {
+        return ModelEntity.builder()
                 .name("Bebida")
                 .build();
     }
@@ -179,7 +181,7 @@ class VehicleRepositoryAdapterTest {
         vehicleEntity.setPrice(BigDecimal.TEN);
         vehicleEntity.setDescription("Coca-Cola");
         vehicleEntity.setVehicleTypeEntity(getVehicleTypeEntity());
-        vehicleEntity.setBrandEntity(getBrandEntity());
+        vehicleEntity.setModelEntity(getModelEntity());
 
         // Simulando o lançamento de uma exceção
         doThrow(new DataException("Value too long for column 'name'", null)).when(productRepository).save(vehicleEntity);

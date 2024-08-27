@@ -227,7 +227,6 @@ class VehicleRepositoryTest {
         productEntity.setPrice(BigDecimal.TEN);
         productEntity.setDescription("Coca-Cola");
         productEntity.setVehicleTypeEntity(productType);
-        productEntity.setBrandEntity(brandEntity);
 
         assertThrows(DataIntegrityViolationException.class, () -> {
             productRepository.save(productEntity);

@@ -25,7 +25,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/v1/brands")
+@RequestMapping("/v1/models")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 @CrossOrigin(origins = "*", allowedHeaders = "Content-Type, Authorization", maxAge = 3600)
 public class ModelResources {

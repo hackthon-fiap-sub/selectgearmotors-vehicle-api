@@ -17,7 +17,6 @@ public interface VehicleMapper {
     @Mapping(source = "description", target = "description")
     @Mapping(source = "price", target = "price")
     @Mapping(source = "vehicleTypeId", target = "vehicleTypeEntity.id")
-    @Mapping(source = "brandId", target = "brandEntity.id")
     @Mapping(source = "modelId", target = "modelEntity.id")
     @Mapping(source = "vehicleStatus", target = "vehicleStatus")
     VehicleEntity fromModelTpEntity(Vehicle vehicle);
@@ -26,8 +25,7 @@ public interface VehicleMapper {
     @Mapping(target = "id", source = "id")
     @Mapping(target = "code", source = "code")
     @Mapping(target = "vehicleTypeId", source = "vehicleTypeEntity.id")
-    @Mapping(target = "brandId", source = "brandEntity.id")
-    @Mapping(target = "modelId", source = "brandEntity.id")
+    @Mapping(target = "modelId", source = "modelEntity.id")
     Vehicle fromEntityToModel(VehicleEntity vehicleEntity);
 
     List<Vehicle> map(List<VehicleEntity> vehicleEntities);

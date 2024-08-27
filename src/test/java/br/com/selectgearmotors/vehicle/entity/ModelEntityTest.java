@@ -1,5 +1,6 @@
 package br.com.selectgearmotors.vehicle.entity;
 
+import br.com.selectgearmotors.vehicle.infrastructure.entity.brand.BrandEntity;
 import br.com.selectgearmotors.vehicle.infrastructure.entity.model.ModelEntity;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -9,7 +10,7 @@ public class ModelEntityTest {
     @Test
     public void testConstructor() {
         // Arrange & Act
-        ModelEntity entity = new ModelEntity(1L, "V$");
+        ModelEntity entity = new ModelEntity(1L, "V$", new BrandEntity(1L, "Brand"));
 
         // Assert
         assertEquals(1L, entity.getId());
@@ -33,7 +34,7 @@ public class ModelEntityTest {
     @Test
     public void testToString() {
         // Arrange
-        ModelEntity entity = new ModelEntity(1L, "V$");
+        ModelEntity entity = new ModelEntity(1L, "V$",  new BrandEntity(1L, "Brand"));
 
         // Act
         String toString = entity.toString();
@@ -48,8 +49,8 @@ public class ModelEntityTest {
     @Test
     public void testHashCode() {
         // Arrange
-        ModelEntity entity1 = new ModelEntity(1L, "V$");
-        ModelEntity entity2 = new ModelEntity(1L, "V$");
+        ModelEntity entity1 = new ModelEntity(1L, "V$",  new BrandEntity(1L, "Brand"));
+        ModelEntity entity2 = new ModelEntity(1L, "V$",  new BrandEntity(1L, "Brand"));
 
         // Act & Assert
         assertEquals(entity1.hashCode(), entity2.hashCode());
@@ -58,9 +59,9 @@ public class ModelEntityTest {
     @Test
     public void testEquals() {
         // Arrange
-        ModelEntity entity1 = new ModelEntity(1L, "V$");
-        ModelEntity entity2 = new ModelEntity(1L, "V$");
-        ModelEntity entity3 = new ModelEntity(2L, "X$");
+        ModelEntity entity1 = new ModelEntity(1L, "V$",  new BrandEntity(1L, "Brand"));
+        ModelEntity entity2 = new ModelEntity(1L, "V$",  new BrandEntity(1L, "Brand"));
+        ModelEntity entity3 = new ModelEntity(2L, "X$",  new BrandEntity(1L, "Brand"));
 
         // Act & Assert
         assertEquals(entity1, entity2);

@@ -9,7 +9,7 @@ public class ModelTest {
     @Test
     public void testConstructor() {
         // Arrange & Act
-        Model model = new Model(1L, "ModelName");
+        Model model = new Model(1L, "ModelName", 1L);
 
         // Assert
         assertEquals(1L, model.getId());
@@ -33,7 +33,7 @@ public class ModelTest {
     @Test
     public void testToString() {
         // Arrange
-        Model model = new Model(1L, "ModelName");
+        Model model = new Model(1L, "ModelName", 1L);
 
         // Act
         String toString = model.toString();
@@ -48,8 +48,8 @@ public class ModelTest {
     @Test
     public void testHashCode() {
         // Arrange
-        Model model1 = new Model(1L, "ModelName");
-        Model model2 = new Model(1L, "ModelName");
+        Model model1 = new Model(1L, "ModelName", 1L);
+        Model model2 = new Model(1L, "ModelName", 1L);
 
         // Act & Assert
         assertEquals(model1.hashCode(), model2.hashCode());
@@ -58,9 +58,9 @@ public class ModelTest {
     @Test
     public void testEquals() {
         // Arrange
-        Model model1 = new Model(1L, "ModelName");
-        Model model2 = new Model(1L, "ModelName");
-        Model model3 = new Model(2L, "AnotherModel");
+        Model model1 = new Model(1L, "ModelName",1L);
+        Model model2 = new Model(1L, "ModelName", 1L);
+        Model model3 = new Model(2L, "AnotherModel", 1L);
 
         // Act & Assert
         assertEquals(model1, model2);

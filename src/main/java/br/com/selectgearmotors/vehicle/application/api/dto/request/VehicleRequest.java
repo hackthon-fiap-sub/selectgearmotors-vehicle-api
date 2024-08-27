@@ -51,11 +51,6 @@ public class VehicleRequest implements Serializable {
 
     @Schema(description = "Restaurant of the User.",
             example = "1", ref = "RestaurantEntity")
-    @NotNull
-    private Long brandId;
-
-    @Schema(description = "Restaurant of the User.",
-            example = "1", ref = "RestaurantEntity")
     private Long modelId;
 
     @Schema(description = "Status of the Product.",

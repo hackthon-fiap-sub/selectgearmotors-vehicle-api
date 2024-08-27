@@ -26,4 +26,8 @@ public class ModelResponse implements Serializable {
             example = "Vicente")
     @Size(min = 3, max = 255)
     private String name;
+
+    @Schema(description = "Name of the Product.",
+            example = "Vicente")
+    private Long brandId;
 }

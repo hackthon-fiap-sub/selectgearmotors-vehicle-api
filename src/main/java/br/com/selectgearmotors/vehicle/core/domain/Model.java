@@ -25,8 +25,11 @@ public class Model implements Serializable {
             example = "1")
     private String name;
 
+    private Long brandId;
+
     public void update(Long id, Model model) {
         this.id = id;
         this.name = model.getName();
+        this.brandId = model.getBrandId();
     }
 }

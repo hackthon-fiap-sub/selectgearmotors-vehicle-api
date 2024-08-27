@@ -13,10 +13,12 @@ import java.util.List;
 public interface ModelApiMapper {
 
     @Mapping(source = "name", target = "name")
+    @Mapping(source = "brandId", target = "brandId")
     Model fromRequest(ModelRequest request);
 
     @InheritInverseConfiguration
     @Mapping(target = "id", source = "id")
+    @Mapping(source = "brandId", target = "brandId")
     ModelResponse fromEntity(Model model);
 
     List<ModelResponse> map(List<Model> models);

@@ -7,7 +7,6 @@ create table vehicle.tb_vehicle (
     description varchar(255) not null,
     price numeric(19,2) not null,
     vehicle_type_id bigint not null,
-    brand_id bigint not null,
     model_id bigint not null,
     vehicle_status varchar(255) not null,
     create_by varchar(255) not null,
