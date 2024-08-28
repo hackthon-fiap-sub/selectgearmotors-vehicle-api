@@ -55,7 +55,8 @@ public class VehicleEntity extends AuditDomain {
 
     @Schema(description = "picture of the Product.",
             example = "V$")
-    private int year;
+    @Column(name = "vehicle_year")
+    private int vehicleYear;
 
     @Schema(description = "description of the Product.",
             example = "V$")
@@ -95,7 +96,7 @@ public class VehicleEntity extends AuditDomain {
         this.code = vehicleEntity.getCode();
         this.cor = vehicleEntity.getCor();
         this.pic = vehicleEntity.getPic();
-        this.year = vehicleEntity.getYear();
+        this.vehicleYear = vehicleEntity.getVehicleYear();
         this.description = vehicleEntity.getDescription();
         this.price = vehicleEntity.getPrice();
         this.vehicleTypeEntity = vehicleEntity.getVehicleTypeEntity();

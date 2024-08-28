@@ -23,7 +23,7 @@ public class VehicleEntityTest {
         assertEquals("V123", entity.getCode());
         assertEquals("Red", entity.getCor());
         assertEquals("pic.jpg", entity.getPic());
-        assertEquals(2022, entity.getYear());
+        assertEquals(2022, entity.getVehicleYear());
         assertEquals("Description", entity.getDescription());
         assertEquals(new BigDecimal("10000"), entity.getPrice());
         assertNotNull(entity.getVehicleTypeEntity());
@@ -41,7 +41,7 @@ public class VehicleEntityTest {
         entity.setCode("V123");
         entity.setCor("Red");
         entity.setPic("pic.jpg");
-        entity.setYear(2022);
+        entity.setVehicleYear(2022);
         entity.setDescription("Description");
         entity.setPrice(new BigDecimal("10000"));
         entity.setVehicleTypeEntity(new VehicleTypeEntity());
@@ -53,7 +53,7 @@ public class VehicleEntityTest {
         assertEquals("V123", entity.getCode());
         assertEquals("Red", entity.getCor());
         assertEquals("pic.jpg", entity.getPic());
-        assertEquals(2022, entity.getYear());
+        assertEquals(2022, entity.getVehicleYear());
         assertEquals("Description", entity.getDescription());
         assertEquals(new BigDecimal("10000"), entity.getPrice());
         assertNotNull(entity.getVehicleTypeEntity());
@@ -76,10 +76,10 @@ public class VehicleEntityTest {
         assertTrue(toString.contains("code=V123"));
         assertTrue(toString.contains("cor=Red"));
         assertTrue(toString.contains("pic=pic.jpg"));
-        assertTrue(toString.contains("year=2022"));
+        assertTrue(toString.contains("vehicleYear=2022"));
         assertTrue(toString.contains("description=Description"));
         assertTrue(toString.contains("price=10000"));
-        assertTrue(toString.contains("vehicleStatus=ACTIVE"));
+        assertTrue(toString.contains("vehicleStatus=AVAILABLE"));
     }
 
     @Test

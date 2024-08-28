@@ -48,9 +48,6 @@ class VehicleTypeResourcesTest {
     @Autowired
     private VehicleTypeRepository repository;
 
-    @Autowired
-    private VehicleRepository productRepository;
-
     private VehicleType vehicleType;
 
     private Long productTypeId;
@@ -72,16 +69,15 @@ class VehicleTypeResourcesTest {
 
     @BeforeEach
     void setUp() {
-        productRepository.deleteAll();
         repository.deleteAll();
+
         this.vehicleType = service.save(getVehicleType());
         this.productTypeId = vehicleType.getId();
     }
 
     @Test
     void findsTaskById() throws Exception {
-        Long id = vehicleType.getId();
-        mockMvc.perform(get("/v1/product-categories/{id}", id))
+        mockMvc.perform(get("/v1/vehicle-types/{id}", this.productTypeId))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("Bebida"));
@@ -91,7 +87,7 @@ class VehicleTypeResourcesTest {
     void getAll() throws Exception
     {
         mockMvc.perform(MockMvcRequestBuilders
-                        .get("/v1/product-categories")
+                        .get("/v1/vehicle-types")
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -104,7 +100,7 @@ class VehicleTypeResourcesTest {
         repository.deleteAll();
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
-                        .get("/v1/product-categories")
+                        .get("/v1/vehicle-types")
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isNoContent())
@@ -119,7 +115,7 @@ class VehicleTypeResourcesTest {
         String create = JsonUtil.getJson(getVehicleType());
 
         mockMvc.perform(MockMvcRequestBuilders
-                        .post("/v1/product-categories")
+                        .post("/v1/vehicle-types")
                         .content(create)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -131,7 +127,7 @@ class VehicleTypeResourcesTest {
     void create_isNull() throws Exception {
         String create = JsonUtil.getJson(new VehicleType());
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
-                        .post("/v1/product-categories")
+                        .post("/v1/vehicle-types")
                         .content(create)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -150,7 +146,7 @@ class VehicleTypeResourcesTest {
         when(productTypeApiMapper.fromRequest(productTypeRequest)).thenThrow(new RuntimeException("Produto não encontroado ao cadastrar"));
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
-                        .post("/v1/product-categories")
+                        .post("/v1/vehicle-types")
                         .content(create)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -169,7 +165,7 @@ class VehicleTypeResourcesTest {
         String update = JsonUtil.getJson(getVehicleTypeUpdate());
 
         mockMvc.perform( MockMvcRequestBuilders
-                        .put("/v1/product-categories/{id}", id)
+                        .put("/v1/vehicle-types/{id}", id)
                         .content(update)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -182,7 +178,7 @@ class VehicleTypeResourcesTest {
         String update = JsonUtil.getJson(new VehicleTypeRequest());
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
-                        .put("/v1/product-categories/{id}", productTypeId)
+                        .put("/v1/vehicle-types/{id}", productTypeId)
                         .content(update)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -201,7 +197,7 @@ class VehicleTypeResourcesTest {
         when(productTypeApiMapper.fromRequest(product)).thenThrow(new RuntimeException("Produto não encontroado ao atualizar"));
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
-                        .put("/v1/product-categories/{id}", productTypeId)
+                        .put("/v1/vehicle-types/{id}", productTypeId)
                         .content(create)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -214,13 +210,13 @@ class VehicleTypeResourcesTest {
 
     @Test
     void delete() throws Exception {
-        mockMvc.perform( MockMvcRequestBuilders.delete("/v1/product-categories/{id}", 1) )
+        mockMvc.perform( MockMvcRequestBuilders.delete("/v1/vehicle-types/{id}", 1) )
                 .andExpect(status().isNoContent());
     }
 
     @Test
     void findByCode_productIsNull() throws Exception {
-        MvcResult result = mockMvc.perform(get("/v1/product-categories/{id}", 99l))
+        MvcResult result = mockMvc.perform(get("/v1/vehicle-types/{id}", 99l))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andReturn();
@@ -234,7 +230,7 @@ class VehicleTypeResourcesTest {
         VehicleTypeRequest productTypeRequest = new VehicleTypeRequest();
         when(productTypeApiMapper.fromRequest(productTypeRequest)).thenThrow(new RuntimeException("Produto não encontrado ao buscar por código"));
 
-        MvcResult result = mockMvc.perform(get("/v1/product-categories/{id}", 99L))
+        MvcResult result = mockMvc.perform(get("/v1/vehicle-types/{id}", 99L))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andReturn();

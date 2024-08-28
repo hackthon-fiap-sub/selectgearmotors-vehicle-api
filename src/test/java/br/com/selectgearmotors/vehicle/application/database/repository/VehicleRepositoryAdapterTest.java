@@ -98,12 +98,11 @@ class VehicleRepositoryAdapterTest {
                 .price(BigDecimal.TEN)
                 .description("Coca-Cola")
                 .vehicleTypeId(vehicleType.getId())
-                .brandId(brand.getId())
                 .modelId(model.getId())
                 .build();
     }
 
-    private Vehicle getVehicle1(Brand brand, Model model, VehicleType vehicleType) {
+    private Vehicle getVehicle1(Model model, VehicleType vehicleType) {
         return Vehicle.builder()
                 .cor("Bebida 1")
                 .code(UUID.randomUUID().toString())
@@ -111,12 +110,11 @@ class VehicleRepositoryAdapterTest {
                 .price(BigDecimal.TEN)
                 .description("Coca-Cola")
                 .vehicleTypeId(vehicleType.getId())
-                .brandId(brand.getId())
                 .modelId(model.getId())
                 .build();
     }
 
-    private Vehicle getVehicle2(Brand brand, Model model, VehicleType vehicleType) {
+    private Vehicle getVehicle2(Model model, VehicleType vehicleType) {
         return Vehicle.builder()
                 .cor("Bebida 1")
                 .code(UUID.randomUUID().toString())
@@ -124,7 +122,6 @@ class VehicleRepositoryAdapterTest {
                 .price(BigDecimal.TEN)
                 .description("Coca-Cola")
                 .vehicleTypeId(vehicleType.getId())
-                .brandId(brand.getId())
                 .modelId(model.getId())
                 .build();
     }
@@ -161,15 +158,15 @@ class VehicleRepositoryAdapterTest {
 
     @Test
     void should_store_a_product_category() {
-        String cocaColaBeverage = "Coca-Cola";
+        String azul = "Azul";
         VehicleEntity cocaCola = VehicleEntity.builder()
-                .cor(cocaColaBeverage)
+                .cor(azul)
                 .build();
 
         when(productRepository.save(cocaCola)).thenReturn(cocaCola);
         VehicleEntity saved = productRepository.save(cocaCola);
         log.info("VehicleEntity:{}", saved);
-        assertThat(saved).hasFieldOrPropertyWithValue("name", cocaColaBeverage);
+        assertThat(saved).hasFieldOrPropertyWithValue("cor", azul);
     }
 
     @Disabled

@@ -28,7 +28,7 @@ public class Vehicle implements Serializable {
 
     private String cor;
 
-    private int year;
+    private int vehicleYear;
 
     @Schema(description = "name of the Product.",
             example = "V$")
@@ -48,10 +48,6 @@ public class Vehicle implements Serializable {
 
     @Schema(description = "name of the Product.",
             example = "V$")
-    private Long brandId;
-
-    @Schema(description = "name of the Product.",
-            example = "V$")
     private Long modelId;
 
     private String vehicleStatus;
@@ -60,12 +56,11 @@ public class Vehicle implements Serializable {
         this.id = id;
         this.code = vehicle.getCode();
         this.cor = vehicle.getCor();
-        this.year = vehicle.getYear();
+        this.vehicleYear = vehicle.getVehicleYear();
         this.description = vehicle.getDescription();
         this.price = vehicle.getPrice();
         this.pic = vehicle.getPic();
         this.vehicleTypeId = vehicle.getVehicleTypeId();
-        this.brandId = vehicle.getBrandId();
         this.modelId = vehicle.getModelId();
         this.vehicleStatus = vehicle.getVehicleStatus();
     }

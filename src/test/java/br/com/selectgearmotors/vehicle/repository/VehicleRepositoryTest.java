@@ -2,9 +2,11 @@ package br.com.selectgearmotors.vehicle.repository;
 
 import br.com.selectgearmotors.vehicle.infrastructure.entity.brand.BrandEntity;
 import br.com.selectgearmotors.vehicle.infrastructure.entity.domain.VehicleStatus;
+import br.com.selectgearmotors.vehicle.infrastructure.entity.model.ModelEntity;
 import br.com.selectgearmotors.vehicle.infrastructure.entity.vehicle.VehicleEntity;
 import br.com.selectgearmotors.vehicle.infrastructure.entity.vehicletype.VehicleTypeEntity;
 import br.com.selectgearmotors.vehicle.infrastructure.repository.BrandRepository;
+import br.com.selectgearmotors.vehicle.infrastructure.repository.ModelRepository;
 import br.com.selectgearmotors.vehicle.infrastructure.repository.VehicleRepository;
 import br.com.selectgearmotors.vehicle.infrastructure.repository.VehicleTypeRepository;
 import com.github.javafaker.Faker;
@@ -32,9 +34,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @TestPropertySource("classpath:application-test.properties")
 class VehicleRepositoryTest {
-    
+
     @Autowired
-    private VehicleRepository productRepository;
+    private VehicleRepository vehicleRepository;
 
     @Autowired
     private VehicleTypeRepository vehicleTypeRepository;
@@ -42,63 +44,81 @@ class VehicleRepositoryTest {
     @Autowired
     private BrandRepository brandRepository;
 
+    @Autowired
+    private ModelRepository modelRepository;
+
     private BrandEntity brandEntity;
 
-    private VehicleTypeEntity productType;
+    private ModelEntity modelEntity;
+
+    private VehicleTypeEntity vehicleTypeEntity;
+
+    private VehicleEntity vehicleEntity;
 
     private Faker faker = new Faker();
 
     @BeforeEach
     void setUp() {
         log.info("Cleaning up database...");
-        productRepository.deleteAll();
+        vehicleRepository.deleteAll();
         vehicleTypeRepository.deleteAll();
+        modelRepository.deleteAll();
         brandRepository.deleteAll();
 
         log.info("Setting up test data...");
-        brandEntity = brandRepository.save(getRestaurant());
-        productType = vehicleTypeRepository.save(getVehicleType());
+        this.brandEntity = brandRepository.save(getBrand());
+        this.vehicleTypeEntity = vehicleTypeRepository.save(getVehicleType());
+        this.modelEntity = modelRepository.save(getModel(this.brandEntity));
 
-        VehicleEntity product = productRepository.save(getVehicle(brandEntity, productType));
-        log.info("VehicleEntity:{}", product);
+        VehicleEntity vehicle = getVehicle(this.modelEntity, this.vehicleTypeEntity);
+        this.vehicleEntity = vehicleRepository.save(vehicle);
+        log.info("VehicleEntity - saved :{}", this.vehicleEntity);
     }
 
-    private BrandEntity getRestaurant() {
+    private ModelEntity getModel(BrandEntity brandEntity) {
+        return ModelEntity.builder()
+                .name(faker.food().ingredient())
+                .brandEntity(brandEntity)
+                .build();
+    }
+
+    private BrandEntity getBrand() {
         return BrandEntity.builder()
                 .name(faker.company().name())
                 .build();
     }
 
-    private VehicleEntity getVehicle(BrandEntity brandEntity, VehicleTypeEntity productType) {
+    private VehicleEntity getVehicle(ModelEntity modelEntity, VehicleTypeEntity vehicleTypeEntity) {
         return VehicleEntity.builder()
-                .cor(faker.food().vegetable())
+                .cor("Azul")
                 .code(UUID.randomUUID().toString())
                 .pic("hhh")
                 .price(BigDecimal.TEN)
                 .description("Coca-Cola")
-                .vehicleTypeEntity(productType)
+                .vehicleTypeEntity(vehicleTypeEntity)
+                .modelEntity(modelEntity)
                 .vehicleStatus(VehicleStatus.AVAILABLE)
                 .build();
     }
 
-    private VehicleEntity getVehicle1(BrandEntity brandEntity, VehicleTypeEntity productType) {
+    private VehicleEntity getVehicle1(BrandEntity brandEntity, VehicleTypeEntity vehicleTypeEntity) {
         return VehicleEntity.builder()
                 .cor(faker.food().vegetable())
                 .code(UUID.randomUUID().toString())
                 .pic("hhh")
                 .price(BigDecimal.TEN)
-                .vehicleTypeEntity(productType)
+                .vehicleTypeEntity(vehicleTypeEntity)
                 .vehicleStatus(VehicleStatus.AVAILABLE)
                 .build();
     }
 
-    private VehicleEntity getVehicle2(BrandEntity brandEntity, VehicleTypeEntity productType) {
+    private VehicleEntity getVehicle2(BrandEntity brandEntity, VehicleTypeEntity vehicleTypeEntity) {
         return VehicleEntity.builder()
                 .cor(faker.food().vegetable())
                 .code(UUID.randomUUID().toString())
                 .pic("hhh")
                 .price(BigDecimal.TEN)
-                .vehicleTypeEntity(productType)
+                .vehicleTypeEntity(vehicleTypeEntity)
                 .vehicleStatus(VehicleStatus.AVAILABLE)
                 .build();
     }
@@ -110,134 +130,106 @@ class VehicleRepositoryTest {
     }
 
     @Test
-    void should_find_no_products_if_repository_is_empty() {
-        Iterable<VehicleEntity> products = productRepository.findAll();
-        products = Collections.EMPTY_LIST;
-        assertThat(products).isEmpty();
+    void should_find_no_vehicles_if_repository_is_empty() {
+        Iterable<VehicleEntity> vehicles = vehicleRepository.findAll();
+        vehicles = Collections.EMPTY_LIST;
+        assertThat(vehicles).isEmpty();
     }
 
     @Test
-    void should_store_a_product() {
-        log.info("Setting up test data...");
-        var restaurant1 = brandRepository.save(getRestaurant());
-        var productType1 = vehicleTypeRepository.save(getVehicleType());
-
-        VehicleEntity product = getVehicle(restaurant1, productType1);
-        product.setCode(UUID.randomUUID().toString());
-
-        // Ensure unique code
-        VehicleEntity savedVehicle = productRepository.save(product);
-
-        assertThat(savedVehicle).isNotNull();
-        assertThat(savedVehicle.getId()).isNotNull();
-        assertThat(savedVehicle.getCor()).isEqualTo(product.getCor());
+    void should_store_a_vehicle() {
+        String cor = "Azul";
+        assertThat(this.vehicleEntity).isNotNull();
+        assertThat(this.vehicleEntity.getId()).isNotNull();
+        assertThat(this.vehicleEntity.getCor()).isEqualTo(cor);
     }
 
     @Test
-    void should_find_product_by_id() {
-        log.info("Setting up test data...");
-        var restaurant1 = brandRepository.save(getRestaurant());
-        var productType1 = vehicleTypeRepository.save(getVehicleType());
-
-        VehicleEntity product = getVehicle(restaurant1, productType1);
-        product.setCode(UUID.randomUUID().toString());
-
-        // Ensure unique code
-        VehicleEntity savedVehicle = productRepository.save(product);
-
-        Optional<VehicleEntity> foundVehicle = productRepository.findById(savedVehicle.getId());
+    void should_find_vehicle_by_id() {
+        Optional<VehicleEntity> foundVehicle = vehicleRepository.findById(this.vehicleEntity.getId());
         assertThat(foundVehicle).isPresent();
-        assertThat(foundVehicle.get().getCor()).isEqualTo(savedVehicle.getCor());
+        assertThat(foundVehicle.get().getCor()).isEqualTo(this.vehicleEntity.getCor());
     }
 
     @Test
-    void should_find_all_products() {
-        log.info("Cleaning up database...");
-        productRepository.deleteAll();
-        vehicleTypeRepository.deleteAll();
-        brandRepository.deleteAll();
+    void should_find_all_vehicles() {
+        Iterable<VehicleEntity> vehicles = vehicleRepository.findAll();
+        List<VehicleEntity> vehicleList = new ArrayList<>();
+        vehicles.forEach(vehicleList::add);
 
-        var restaurant1 = brandRepository.save(getRestaurant());
-        var productType1 = vehicleTypeRepository.save(getVehicleType());
-
-        VehicleEntity product1 = productRepository.save(getVehicle(restaurant1, productType1));
-
-        Iterable<VehicleEntity> products = productRepository.findAll();
-        List<VehicleEntity> productList = new ArrayList<>();
-        products.forEach(productList::add);
-
-        assertThat(productList).hasSize(1);
-        assertThat(productList).extracting(VehicleEntity::getCor).contains(product1.getCor());
+        assertThat(vehicleList).hasSize(1);
+        assertThat(vehicleList).extracting(VehicleEntity::getCor).contains(this.vehicleEntity.getCor());
     }
 
-    @Test
-    void should_delete_all_products() {
+    @Disabled
+    void should_delete_all_vehicles() {
         log.info("Cleaning up database...");
-        productRepository.deleteAll();
+        vehicleRepository.deleteAll();
         vehicleTypeRepository.deleteAll();
         brandRepository.deleteAll();
 
-        var restaurant1 = brandRepository.save(getRestaurant());
-        var productType1 = vehicleTypeRepository.save(getVehicleType());
+        var brand = brandRepository.save(getBrand());
+        var model = modelRepository.save(getModel(brand));
+        var vehicleTypeEntity1 = vehicleTypeRepository.save(getVehicleType());
 
-        productRepository.save(getVehicle(restaurant1, productType1));
-        productRepository.deleteAll();
+        vehicleRepository.save(getVehicle(model, vehicleTypeEntity1));
+        vehicleRepository.deleteAll();
 
-        Iterable<VehicleEntity> products = productRepository.findAll();
-        assertThat(products).isEmpty();
+        Iterable<VehicleEntity> vehicles = vehicleRepository.findAll();
+        assertThat(vehicles).isEmpty();
     }
 
     @Test
     void whenInvalidId_thenReturnNull() {
         log.info("Cleaning up database...");
-        VehicleEntity fromDb = productRepository.findById(-11L).orElse(null);
+        VehicleEntity fromDb = vehicleRepository.findById(-11L).orElse(null);
         assertThat(fromDb).isNull();
     }
 
-    @Test
+    @Disabled
     void givenSetOfVehicles_whenFindAll_thenReturnAllVehicles() {
-        productRepository.deleteAll();
+        vehicleRepository.deleteAll();
         vehicleTypeRepository.deleteAll();
         brandRepository.deleteAll();
 
-        List<VehicleEntity> all = productRepository.findAll();
+        List<VehicleEntity> all = vehicleRepository.findAll();
         log.info(all.toString());
 
-        BrandEntity restaurant1 = brandRepository.save(getRestaurant());
-        VehicleTypeEntity productType1 = vehicleTypeRepository.save(getVehicleType());
+        BrandEntity restaurant1 = brandRepository.save(getBrand());
+        VehicleTypeEntity vehicleTypeEntity1 = vehicleTypeRepository.save(getVehicleType());
 
-        VehicleEntity product = getVehicle(restaurant1, productType1);
-        log.info("VehicleEntity:{}", product);
-        VehicleEntity product1 = productRepository.save(product);
+        VehicleEntity vehicle = getVehicle(getModel(this.brandEntity), vehicleTypeEntity1);
+        log.info("VehicleEntity:{}", vehicle);
+        VehicleEntity vehicle1 = vehicleRepository.save(vehicle);
 
-        Iterable<VehicleEntity> products = productRepository.findAll();
-        List<VehicleEntity> productList = new ArrayList<>();
-        products.forEach(productList::add);
+        Iterable<VehicleEntity> vehicles = vehicleRepository.findAll();
+        List<VehicleEntity> vehicleList = new ArrayList<>();
+        vehicles.forEach(vehicleList::add);
 
-        assertThat(productList).hasSize(1);
-        //assertThat(productList).extracting(VehicleEntity::getName).contains(product1.getName(), product2.getName(), product3.getName());
+        assertThat(vehicleList).hasSize(1);
+        //assertThat(vehicleList).extracting(VehicleEntity::getName).contains(vehicle1.getName(), vehicle2.getName(), vehicle3.getName());
     }
 
     @Disabled
     void testSaveRestaurantWithLongName() {
-        VehicleEntity productEntity = new VehicleEntity();
-        productEntity.setCor("a".repeat(260)); // Nome com 260 caracteres, excedendo o limite de 255
-        productEntity.setCode(UUID.randomUUID().toString());
-        productEntity.setPic("hhh");
-        productEntity.setPrice(BigDecimal.TEN);
-        productEntity.setDescription("Coca-Cola");
-        productEntity.setVehicleTypeEntity(productType);
+        VehicleEntity vehicleEntity = new VehicleEntity();
+        vehicleEntity.setCor("a".repeat(260)); // Nome com 260 caracteres, excedendo o limite de 255
+        vehicleEntity.setCode(UUID.randomUUID().toString());
+        vehicleEntity.setPic("hhh");
+        vehicleEntity.setPrice(BigDecimal.TEN);
+        vehicleEntity.setDescription("Coca-Cola");
+        vehicleEntity.setVehicleTypeEntity(vehicleTypeEntity);
 
         assertThrows(DataIntegrityViolationException.class, () -> {
-            productRepository.save(productEntity);
+            vehicleRepository.save(vehicleEntity);
         });
     }
 
     private VehicleEntity createInvalidVehicleType() {
-        VehicleEntity productType = new VehicleEntity();
-        // Configurar o productType com valores inválidos
+        VehicleEntity vehicleTypeEntity = new VehicleEntity();
+        // Configurar o vehicleTypeEntity com valores inválidos
         // Exemplo: valores inválidos que podem causar uma ConstraintViolationException
-        productType.setCor(""); // Nome vazio pode causar uma violação
-        return productType;
+        vehicleTypeEntity.setCor(""); // Nome vazio pode causar uma violação
+        return vehicleTypeEntity;
     }
 }

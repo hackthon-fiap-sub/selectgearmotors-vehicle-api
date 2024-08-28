@@ -45,7 +45,7 @@ public class VehicleResponse implements Serializable {
 
     @Schema(description = "picture of the Product.",
             example = "V$")
-    private int year;
+    private int vehicleYear;
 
     @Schema(description = "description of the Product.",
             example = "V$")

@@ -74,7 +74,7 @@ class BrandResourcesTest {
 
     @Test
     void findsTaskById() throws Exception {
-        mockMvc.perform(get("/v1/restaurants/{id}", this.restaurant.getId()))
+        mockMvc.perform(get("/v1/brands/{id}", this.restaurant.getId()))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("Seven Food - Filial"));
@@ -84,7 +84,7 @@ class BrandResourcesTest {
     void getAll() throws Exception
     {
         mockMvc.perform(MockMvcRequestBuilders
-                        .get("/v1/restaurants")
+                        .get("/v1/brands")
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -99,7 +99,7 @@ class BrandResourcesTest {
         String create = JsonUtil.getJson(restaurantToSave);
 
         mockMvc.perform(MockMvcRequestBuilders
-                        .post("/v1/restaurants")
+                        .post("/v1/brands")
                         .content(create)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -111,7 +111,7 @@ class BrandResourcesTest {
     void create_isNull() throws Exception {
         String create = JsonUtil.getJson(new Brand());
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
-                        .post("/v1/restaurants")
+                        .post("/v1/brands")
                         .content(create)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -130,7 +130,7 @@ class BrandResourcesTest {
         when(productApiMapper.fromRequest(restaurantRequest)).thenThrow(new RuntimeException("Brande não encontroado ao atualizar"));
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
-                        .post("/v1/restaurants")
+                        .post("/v1/brands")
                         .content(create)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -149,7 +149,7 @@ class BrandResourcesTest {
         String update = JsonUtil.getJson(savedBrand);
 
         mockMvc.perform(MockMvcRequestBuilders
-                        .put("/v1/restaurants/{id}", id)
+                        .put("/v1/brands/{id}", id)
                         .content(update)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -162,7 +162,7 @@ class BrandResourcesTest {
         String update = JsonUtil.getJson(new Brand());
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
-                        .put("/v1/restaurants/{id}", 99L)
+                        .put("/v1/brands/{id}", 99L)
                         .content(update)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -181,7 +181,7 @@ class BrandResourcesTest {
         when(productApiMapper.fromRequest(product)).thenThrow(new RuntimeException("Brande não encontroado ao atualizar"));
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
-                        .put("/v1/restaurants/{id}", 99L)
+                        .put("/v1/brands/{id}", 99L)
                         .content(create)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -194,13 +194,13 @@ class BrandResourcesTest {
 
     @Test
     void deleteBrandAPI() throws Exception {
-        mockMvc.perform( MockMvcRequestBuilders.delete("/v1/restaurants/{id}", 1) )
+        mockMvc.perform( MockMvcRequestBuilders.delete("/v1/brands/{id}", 1) )
                 .andExpect(status().isNoContent());
     }
 
     @Disabled
     void findById_productIsNull() throws Exception {
-        MvcResult result = mockMvc.perform(get("/v1/restaurants/{id}", 99L))
+        MvcResult result = mockMvc.perform(get("/v1/brands/{id}", 99L))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andReturn();
@@ -214,7 +214,7 @@ class BrandResourcesTest {
         BrandRequest restaurantRequest = new BrandRequest();
         when(productApiMapper.fromRequest(restaurantRequest)).thenThrow(new RuntimeException("Brande não encontrado ao buscar por id"));
 
-        MvcResult result = mockMvc.perform(get("/v1/restaurants/{id}", 99L))
+        MvcResult result = mockMvc.perform(get("/v1/brands/{id}", 99L))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andReturn();

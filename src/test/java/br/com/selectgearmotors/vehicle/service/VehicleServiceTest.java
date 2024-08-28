@@ -86,7 +86,7 @@ class VehicleServiceTest {
                 .build();
     }
 
-    private VehicleEntity getVehicleEntity(BrandEntity brandEntity, ModelEntity modelEntity, VehicleTypeEntity VehicleTypeEntity) {
+    private VehicleEntity getVehicleEntity(ModelEntity modelEntity, VehicleTypeEntity VehicleTypeEntity) {
         return VehicleEntity.builder()
                 .cor("Bebida")
                 .code(UUID.randomUUID().toString())
@@ -98,7 +98,7 @@ class VehicleServiceTest {
                 .build();
     }
 
-    private VehicleEntity getVehicleEntity1(BrandEntity brandEntity, ModelEntity modelEntity, VehicleTypeEntity VehicleTypeEntity) {
+    private VehicleEntity getVehicleEntity1(ModelEntity modelEntity, VehicleTypeEntity VehicleTypeEntity) {
         return VehicleEntity.builder()
                 .cor("Bebida")
                 .code(UUID.randomUUID().toString())
@@ -110,7 +110,7 @@ class VehicleServiceTest {
                 .build();
     }
 
-    private VehicleEntity getVehicleEntity2(BrandEntity brandEntity, ModelEntity modelEntity, VehicleTypeEntity VehicleTypeEntity) {
+    private VehicleEntity getVehicleEntity2(ModelEntity modelEntity, VehicleTypeEntity VehicleTypeEntity) {
         return VehicleEntity.builder()
                 .cor("Bebida")
                 .code(UUID.randomUUID().toString())
@@ -122,7 +122,7 @@ class VehicleServiceTest {
                 .build();
     }
 
-    private Vehicle getVehicle(Brand brand, Model model, VehicleType vehicleType) {
+    private Vehicle getVehicle(Model model, VehicleType vehicleType) {
         return Vehicle.builder()
                 .cor("Coca-Cola")
                 .code(UUID.randomUUID().toString())
@@ -131,11 +131,10 @@ class VehicleServiceTest {
                 .description("Coca-Cola")
                 .vehicleTypeId(vehicleType.getId())
                 .modelId(model.getId())
-                .brandId(brand.getId())
                 .build();
     }
 
-    private Vehicle getVehicle1(Brand brand, Model model, VehicleType vehicleType) {
+    private Vehicle getVehicle1(Model model, VehicleType vehicleType) {
         return Vehicle.builder()
                 .cor("Coca-Cola")
                 .code(UUID.randomUUID().toString())
@@ -144,11 +143,10 @@ class VehicleServiceTest {
                 .description("Coca-Cola")
                 .vehicleTypeId(vehicleType.getId())
                 .modelId(model.getId())
-                .brandId(brand.getId())
                 .build();
     }
 
-    private Vehicle getVehicle2(Brand brand, Model model, VehicleType vehicleType) {
+    private Vehicle getVehicle2(Model model, VehicleType vehicleType) {
         return Vehicle.builder()
                 .cor("Coca-Cola")
                 .code(UUID.randomUUID().toString())
@@ -157,7 +155,6 @@ class VehicleServiceTest {
                 .description("Coca-Cola")
                 .vehicleTypeId(vehicleType.getId())
                 .modelId(model.getId())
-                .brandId(brand.getId())
                 .build();
     }
 
@@ -183,13 +180,13 @@ class VehicleServiceTest {
         List<Vehicle> vehicles = new ArrayList<>();
         List<VehicleEntity> listEntity = new ArrayList<>();
 
-        Vehicle client = getVehicle(getBrand(), getModel(), getVehicleType());
-        Vehicle client1 = getVehicle1(getBrand(), getModel(), getVehicleType());
-        Vehicle client2 = getVehicle2(getBrand(), getModel(), getVehicleType());
+        Vehicle client = getVehicle(getModel(), getVehicleType());
+        Vehicle client1 = getVehicle1(getModel(), getVehicleType());
+        Vehicle client2 = getVehicle2(getModel(), getVehicleType());
 
-        VehicleEntity clientEntity = getVehicleEntity(getBrandEntity(), getModelEntity(), getVehicleTypeEntity());
-        VehicleEntity clientEntity1 = getVehicleEntity1(getBrandEntity(), getModelEntity(), getVehicleTypeEntity());
-        VehicleEntity clientEntity2 = getVehicleEntity2(getBrandEntity(), getModelEntity(), getVehicleTypeEntity());
+        VehicleEntity clientEntity = getVehicleEntity(getModelEntity(), getVehicleTypeEntity());
+        VehicleEntity clientEntity1 = getVehicleEntity1(getModelEntity(), getVehicleTypeEntity());
+        VehicleEntity clientEntity2 = getVehicleEntity2(getModelEntity(), getVehicleTypeEntity());
 
         vehicles.add(client);
         vehicles.add(client1);
@@ -208,7 +205,7 @@ class VehicleServiceTest {
 
     @Test
     void getVehicleByIdTest() {
-        Vehicle vehicle1 = getVehicle(getBrand(), getModel(), getVehicleType());
+        Vehicle vehicle1 = getVehicle(getModel(), getVehicleType());
         when(vehicleService.findById(1L)).thenReturn(vehicle1);
 
         Vehicle vehicle = vehicleService.findById(1L);
@@ -218,7 +215,7 @@ class VehicleServiceTest {
 
     @Test
     void getFindVehicleByShortIdTest() {
-        Vehicle vehicle = getVehicle(getBrand(), getModel(), getVehicleType());
+        Vehicle vehicle = getVehicle(getModel(), getVehicleType());
         when(vehicleService.findById(1L)).thenReturn(vehicle);
 
         Vehicle result = vehicleService.findById(1L);
@@ -228,8 +225,8 @@ class VehicleServiceTest {
 
     @Test
     void createVehicleTest() {
-        Vehicle vehicle = getVehicle(getBrand(), getModel(), getVehicleType());
-        Vehicle vehicleResult = getVehicle(getBrand(), getModel(), getVehicleType());
+        Vehicle vehicle = getVehicle(getModel(), getVehicleType());
+        Vehicle vehicleResult = getVehicle(getModel(), getVehicleType());
         vehicleResult.setId(1L);
 
         when(vehicleService.save(vehicle)).thenReturn(vehicleResult);
@@ -247,7 +244,6 @@ class VehicleServiceTest {
         vehicle.setPic("hhh");
         vehicle.setPrice(BigDecimal.TEN);
         vehicle.setDescription("Coca-Cola");
-        vehicle.setBrandId(1L);
         vehicle.setModelId(1l);
         vehicle.setVehicleTypeId(1l);
 
@@ -270,8 +266,8 @@ class VehicleServiceTest {
 
     @Test
     void testCreateVehicle() {
-        Vehicle vehicle = getVehicle(getBrand(), getModel(), getVehicleType());
-        Vehicle vehicleResult = getVehicle(getBrand(), getModel(), getVehicleType());
+        Vehicle vehicle = getVehicle(getModel(), getVehicleType());
+        Vehicle vehicleResult = getVehicle(getModel(), getVehicleType());
         when(createVehiclePort.save(vehicle)).thenReturn(vehicleResult);
 
         Vehicle result = createVehiclePort.save(vehicle);
@@ -292,7 +288,7 @@ class VehicleServiceTest {
 
     @Test
     void testFindByIdVehicle() {
-        Vehicle vehicle = getVehicle(getBrand(), getModel(), getVehicleType());
+        Vehicle vehicle = getVehicle(getModel(), getVehicleType());
         when(findByIdVehiclePort.findById(1L)).thenReturn(vehicle);
 
         Vehicle result = findByIdVehiclePort.findById(1L);
@@ -303,7 +299,7 @@ class VehicleServiceTest {
 
     @Test
     void testFindVehicles() {
-        Vehicle vehicle = getVehicle(getBrand(), getModel(), getVehicleType());
+        Vehicle vehicle = getVehicle(getModel(), getVehicleType());
         List<Vehicle> vehicles = new ArrayList<>();
         vehicles.add(vehicle);
 
@@ -317,7 +313,7 @@ class VehicleServiceTest {
     @Test
     void testUpdateVehicle() {
         Long vehicleId = 1L;
-        Vehicle vehicle = getVehicle(getBrand(), getModel(), getVehicleType());
+        Vehicle vehicle = getVehicle(getModel(), getVehicleType());
 
         when(updateVehiclePort.update(vehicleId, vehicle)).thenReturn(vehicle);
         Vehicle result = updateVehiclePort.update(vehicleId, vehicle);

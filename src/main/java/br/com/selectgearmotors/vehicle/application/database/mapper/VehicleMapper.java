@@ -13,7 +13,7 @@ public interface VehicleMapper {
 
     @Mapping(source = "cor", target = "cor")
     @Mapping(source = "pic", target = "pic")
-    @Mapping(source = "year", target = "year")
+    @Mapping(source = "vehicleYear", target = "vehicleYear")
     @Mapping(source = "description", target = "description")
     @Mapping(source = "price", target = "price")
     @Mapping(source = "vehicleTypeId", target = "vehicleTypeEntity.id")

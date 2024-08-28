@@ -80,12 +80,11 @@ public class ObjectFactory {
                 .price(BigDecimal.TEN)
                 .description("Coca-Cola")
                 .vehicleTypeId(vehicleType.getId())
-                .brandId(brand.getId())
                 .modelId(model.getId())
                 .build();
     }
 
-    public Vehicle getVehicle1(Brand brand, Model model, VehicleType vehicleType) {
+    public Vehicle getVehicle1(Model model, VehicleType vehicleType) {
         return Vehicle.builder()
                 .cor("Bebida 1")
                 .code(UUID.randomUUID().toString())
@@ -93,12 +92,11 @@ public class ObjectFactory {
                 .price(BigDecimal.TEN)
                 .description("Coca-Cola")
                 .vehicleTypeId(vehicleType.getId())
-                .brandId(brand.getId())
                 .modelId(model.getId())
                 .build();
     }
 
-    public Vehicle getVehicle2(Brand brand, Model model, VehicleType vehicleType) {
+    public Vehicle getVehicle2(Model model, VehicleType vehicleType) {
         return Vehicle.builder()
                 .cor("Bebida 2")
                 .code(UUID.randomUUID().toString())
@@ -106,7 +104,6 @@ public class ObjectFactory {
                 .price(BigDecimal.TEN)
                 .description("Coca-Cola")
                 .vehicleTypeId(vehicleType.getId())
-                .brandId(brand.getId())
                 .modelId(model.getId())
                 .build();
     }
