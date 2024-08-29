@@ -5,6 +5,8 @@ import br.com.selectgearmotors.vehicle.application.api.mapper.BrandApiMapper;
 import br.com.selectgearmotors.vehicle.core.domain.Brand;
 import br.com.selectgearmotors.vehicle.core.service.BrandService;
 import br.com.selectgearmotors.vehicle.infrastructure.repository.BrandRepository;
+import br.com.selectgearmotors.vehicle.infrastructure.repository.ModelRepository;
+import br.com.selectgearmotors.vehicle.infrastructure.repository.VehicleRepository;
 import br.com.selectgearmotors.vehicle.util.JsonUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,8 +29,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -47,6 +48,12 @@ class BrandResourcesTest {
 
     @Autowired
     private BrandRepository repository;
+
+    @Autowired
+    private VehicleRepository vehicleRepository;
+
+    @Autowired
+    private ModelRepository modelRepository;
 
     @Mock
     private BrandApiMapper productApiMapper;
@@ -68,6 +75,8 @@ class BrandResourcesTest {
 
     @BeforeEach
     void setUp() {
+        vehicleRepository.deleteAll();
+        modelRepository.deleteAll();
         repository.deleteAll();
         this.restaurant = service.save(getBrand());
     }
