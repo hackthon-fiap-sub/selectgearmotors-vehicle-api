@@ -48,6 +48,9 @@ class VehicleTypeResourcesTest {
     @Autowired
     private VehicleTypeRepository repository;
 
+    @Autowired
+    private VehicleRepository vehicleRepository;
+
     private VehicleType vehicleType;
 
     private Long productTypeId;
@@ -69,6 +72,7 @@ class VehicleTypeResourcesTest {
 
     @BeforeEach
     void setUp() {
+        vehicleRepository.deleteAll();
         repository.deleteAll();
 
         this.vehicleType = service.save(getVehicleType());
