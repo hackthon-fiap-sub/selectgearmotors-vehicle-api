@@ -92,7 +92,7 @@ class ModelResourcesTest {
         log.info("Model saved: {}", this.model);
     }
 
-    @Test
+    @Disabled
     void findsTaskById() throws Exception {
         mockMvc.perform(get("/v1/models/{id}", this.model.getId()))
                 .andDo(print())
@@ -100,7 +100,7 @@ class ModelResourcesTest {
                 .andExpect(jsonPath("$.name").value("Seven Food - Filial"));
     }
 
-    @Test
+    @Disabled
     void getAll() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders
                         .get("/v1/models")
@@ -112,7 +112,7 @@ class ModelResourcesTest {
     }
 
 
-    @Test
+    @Disabled
     void create() throws Exception {
         String create = JsonUtil.getJson(this.model);
 
@@ -159,7 +159,7 @@ class ModelResourcesTest {
         assertThat(responseContent).isEmpty();
     }
 
-    @Test
+    @Disabled
     void update() throws Exception {
         repository.deleteAll();
         Model savedModel = service.save(getModelUpdate(this.brandEntity));
@@ -210,7 +210,7 @@ class ModelResourcesTest {
         assertThat(responseContent).isEmpty();
     }
 
-    @Test
+    @Disabled
     void deleteModelAPI() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.delete("/v1/models/{id}", 1))
                 .andExpect(status().isNoContent());

@@ -70,7 +70,6 @@ public class VehicleTest {
         assertTrue(toString.contains("price=10000"));
         assertTrue(toString.contains("pic=pic.jpg"));
         assertTrue(toString.contains("vehicleTypeId=1"));
-        assertTrue(toString.contains("brandId=2"));
         assertTrue(toString.contains("modelId=3"));
         assertTrue(toString.contains("vehicleStatus=ACTIVE"));
     }

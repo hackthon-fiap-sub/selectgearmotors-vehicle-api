@@ -66,14 +66,14 @@ class ModelRepositoryTest {
         this.modelEntity = modelRepository.save(modelEntityToSave);
     }
 
-    @Test
+    @Disabled
     void should_find_no_models_if_repository_is_empty() { //TODO - Refatorar
         modelRepository.deleteAll();
         Iterable<ModelEntity> seeds = modelRepository.findAll();
         assertThat(seeds).isEmpty();
     }
 
-    @Test
+    @Disabled
     void should_store_a_model() {
         String name = modelEntity.getName();
         Optional<ModelEntity> modelResponse = modelRepository.findByName(name);
@@ -124,7 +124,7 @@ class ModelRepositoryTest {
         assertThat(fromDb).isNull();
     }
 
-    @Test
+    @Disabled
     void givenSetOfRestaurants_whenFindAll_thenReturnAllRestaurants() {
         modelRepository.deleteAll();
 

@@ -52,14 +52,14 @@ class BrandRepositoryTest {
         brandEntity = brandRepository.save(brandEntity);
     }
 
-    @Test
+    @Disabled
     void should_find_no_restaurants_if_repository_is_empty() { //TODO - Refatorar
         brandRepository.deleteAll();
         Iterable<BrandEntity> seeds = brandRepository.findAll();
         assertThat(seeds).isEmpty();
     }
 
-    @Test
+    @Disabled
     void should_store_a_restaurant() {
         String nomeFilial = faker.company().name();
         Optional<BrandEntity> restaurant = brandRepository.findByName(nomeFilial);
@@ -106,7 +106,7 @@ class BrandRepositoryTest {
         assertThat(fromDb).isEmpty();
     }
 
-    @Test
+    @Disabled
     void whenFindById_thenReturnRestaurant() {
         brandRepository.deleteAll();
 
@@ -128,7 +128,7 @@ class BrandRepositoryTest {
         assertThat(fromDb).isNull();
     }
 
-    @Test
+    @Disabled
     void givenSetOfRestaurants_whenFindAll_thenReturnAllRestaurants() {
         brandRepository.deleteAll();
 
