@@ -14,6 +14,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.mapstruct.Mapping;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -50,7 +51,6 @@ public class VehicleResponse implements Serializable {
     @Schema(description = "description of the Product.",
             example = "V$")
     @Size(min = 0, max = 255)
-    @Column(name = "description", length = 255)
     private String description;
 
     @Schema(description = "price of the Product.",
@@ -61,23 +61,22 @@ public class VehicleResponse implements Serializable {
     @Schema(description = "Restaurant of the User.",
             example = "1", ref = "ProductCategoryEntity")
     @NotNull
-    @ManyToOne
-    @JoinColumn(name = "vehicle_type_id")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private VehicleTypeEntity vehicleTypeEntity;
+    private Long vehicleTypeId;
+
+    private String vehicleTypeName;
 
     @Schema(description = "Restaurant of the User.",
             example = "1", ref = "RestaurantEntity")
     @NotNull
-    @ManyToOne
-    @JoinColumn(name = "model_id")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private ModelEntity modelEntity;
+    private Long modelId;
+
+    private String modelName;
+
+    private Long brandId;
+
+    private String brandName;
 
     @Schema(description = "Status of the Product.",
             example = "ACTIVE")
-    @Enumerated(EnumType.STRING)
-    @Column(name = "vehicle_status")
     private VehicleStatus vehicleStatus;
-
 }

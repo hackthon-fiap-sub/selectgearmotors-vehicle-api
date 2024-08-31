@@ -25,8 +25,13 @@ public interface VehicleApiMapper {
     @InheritInverseConfiguration
     @Mapping(target = "id", source = "id")
     @Mapping(target = "code", source = "code")
+    @Mapping(target = "vehicleTypeId", source = "vehicleTypeId")
+    @Mapping(target = "vehicleTypeName", source = "vehicleTypeName")
+    @Mapping(target = "modelId", source = "modelId")
+    @Mapping(target = "modelName", source = "modelName")
+    @Mapping(target = "brandId", source = "brandId")
+    @Mapping(target = "brandName", source = "brandName")
     VehicleResponse fromEntity(Vehicle product);
 
-   List<VehicleResponse> map(List<Vehicle> products);
-
+    List<VehicleResponse> map(List<Vehicle> products);
 }

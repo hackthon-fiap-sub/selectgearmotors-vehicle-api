@@ -25,7 +25,11 @@ public interface VehicleMapper {
     @Mapping(target = "id", source = "id")
     @Mapping(target = "code", source = "code")
     @Mapping(target = "vehicleTypeId", source = "vehicleTypeEntity.id")
+    @Mapping(target = "vehicleTypeName", source = "vehicleTypeEntity.name")
     @Mapping(target = "modelId", source = "modelEntity.id")
+    @Mapping(target = "modelName", source = "modelEntity.name")
+    @Mapping(target = "brandId", source = "modelEntity.brandEntity.id")
+    @Mapping(target = "brandName", source = "modelEntity.brandEntity.name")
     Vehicle fromEntityToModel(VehicleEntity vehicleEntity);
 
     List<Vehicle> map(List<VehicleEntity> vehicleEntities);

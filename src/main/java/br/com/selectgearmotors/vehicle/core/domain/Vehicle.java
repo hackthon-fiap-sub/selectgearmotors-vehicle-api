@@ -46,9 +46,17 @@ public class Vehicle implements Serializable {
             example = "V$")
     private Long vehicleTypeId;
 
+    private String vehicleTypeName;
+
+    private Long brandId;
+
+    private String brandName;
+
     @Schema(description = "name of the Product.",
             example = "V$")
     private Long modelId;
+
+    private String modelName;
 
     private String vehicleStatus;
 

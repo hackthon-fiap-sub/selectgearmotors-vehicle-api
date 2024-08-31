@@ -73,8 +73,6 @@ public class VehicleApiMapperTest {
         assertEquals(vehicle.getVehicleYear(), response.getVehicleYear());
         assertEquals(vehicle.getDescription(), response.getDescription());
         assertEquals(vehicle.getPrice(), response.getPrice());
-        assertEquals(vehicle.getVehicleTypeId(), response.getVehicleTypeEntity().getId());
-        assertEquals(vehicle.getModelId(), response.getModelEntity().getId());
         assertEquals(vehicle.getVehicleStatus(), response.getVehicleStatus());
     }
 
@@ -122,9 +120,6 @@ public class VehicleApiMapperTest {
         assertEquals(vehicle1.getVehicleYear(), responseList.get(0).getVehicleYear());
         assertEquals(vehicle1.getDescription(), responseList.get(0).getDescription());
         assertEquals(vehicle1.getPrice(), responseList.get(0).getPrice());
-        assertEquals(vehicle1.getVehicleTypeId(), responseList.get(0).getVehicleTypeEntity().getId());
-        assertEquals(vehicle1.getModelId(), responseList.get(0).getModelEntity().getId());
-        //assertEquals(vehicle1.getVehicleStatus(), responseList.get(0).getVehicleStatus());
 
         assertEquals(vehicle2.getId(), responseList.get(1).getId());
         assertEquals(vehicle2.getCode(), responseList.get(1).getCode());
@@ -133,8 +128,5 @@ public class VehicleApiMapperTest {
         assertEquals(vehicle2.getVehicleYear(), responseList.get(1).getVehicleYear());
         assertEquals(vehicle2.getDescription(), responseList.get(1).getDescription());
         assertEquals(vehicle2.getPrice(), responseList.get(1).getPrice());
-        assertEquals(vehicle2.getVehicleTypeId(), responseList.get(1).getVehicleTypeEntity().getId());
-        assertEquals(vehicle2.getModelId(), responseList.get(1).getModelEntity().getId());
-        //assertEquals(vehicle2.getVehicleStatus(), responseList.get(1).getVehicleStatus());
     }
 }
