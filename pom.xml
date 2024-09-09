@@ -11,7 +11,7 @@
     <groupId>br.com.sevenfood.product</groupId>
     <artifactId>selectgearmotors-vehicle-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>sevenfood-product-api</name>
+    <name>selectgearmotors-vehicle-api</name>
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>17</java.version>
@@ -24,34 +24,34 @@
         <sonar.exclusions>
             **/controller/debug/**/*,
             src/test/**/*,
-            src/main/java/br/com/sevenfood/product/sevenfoodproductapi/RunApplication.java,
-            src/main/java/br/com/sevenfood/product/sevenfoodproductapi/application/api/exception/**,
-            src/main/java/br/com/sevenfood/product/sevenfoodproductapi/application/api/dto/**,
-            src/main/java/br/com/sevenfood/product/sevenfoodproductapi/application/api/mapper/**,
-            src/main/java/br/com/sevenfood/product/sevenfoodproductapi/application/database/mapper/**,
-            src/main/java/br/com/sevenfood/product/sevenfoodproductapi/commons/config/**,
-            src/main/java/br/com/sevenfood/product/sevenfoodproductapi/commons/util/**,
-            src/main/java/br/com/sevenfood/product/sevenfoodproductapi/commons/exception/**,
-            src/main/java/br/com/sevenfood/product/sevenfoodproductapi/core/utils/**,
-            src/main/java/br/com/sevenfood/product/sevenfoodproductapi/core/ports/**,
-            src/main/java/br/com/sevenfood/product/sevenfoodproductapi/commons/Constants.java,
+            src/main/java/br/com/selectgearmotors/vehicle/RunApplication.java,
+            src/main/java/br/com/selectgearmotors/vehicle/application/api/exception/**,
+            src/main/java/br/com/selectgearmotors/vehicle/application/api/dto/**,
+            src/main/java/br/com/selectgearmotors/vehicle/application/api/mapper/**,
+            src/main/java/br/com/selectgearmotors/vehicle/application/database/mapper/**,
+            src/main/java/br/com/selectgearmotors/vehicle/commons/config/**,
+            src/main/java/br/com/selectgearmotors/vehicle/commons/util/**,
+            src/main/java/br/com/selectgearmotors/vehicle/commons/exception/**,
+            src/main/java/br/com/selectgearmotors/vehicle/core/utils/**,
+            src/main/java/br/com/selectgearmotors/vehicle/core/ports/**,
+            src/main/java/br/com/selectgearmotors/vehicle/commons/Constants.java,
             pom.xml
         </sonar.exclusions>
         <sonar.coverage.exclusions>
             pom.xml,\
             **/controller/debug/**/*,\
             src/test/**/*,\
-            src/main/java/br/com/sevenfood/product/sevenfoodproductapi/RunApplication.java,
-            src/main/java/br/com/sevenfood/product/sevenfoodproductapi/application/api/exception/**,
-            src/main/java/br/com/sevenfood/product/sevenfoodproductapi/application/api/dto/**,
-            src/main/java/br/com/sevenfood/product/sevenfoodproductapi/application/api/mapper/**,
-            src/main/java/br/com/sevenfood/product/sevenfoodproductapi/application/database/mapper/**,
-            src/main/java/br/com/sevenfood/product/sevenfoodproductapi/commons/config/**,
-            src/main/java/br/com/sevenfood/product/sevenfoodproductapi/commons/util/**,
-            src/main/java/br/com/sevenfood/product/sevenfoodproductapi/commons/exception/**,
-            src/main/java/br/com/sevenfood/product/sevenfoodproductapi/core/utils/**,
-            src/main/java/br/com/sevenfood/product/sevenfoodproductapi/core/ports/**,
-            src/main/java/br/com/sevenfood/product/sevenfoodproductapi/commons/Constants.java,
+            src/main/java/br/com/selectgearmotors/vehicle/RunApplication.java,
+            src/main/java/br/com/selectgearmotors/vehicle/application/api/exception/**,
+            src/main/java/br/com/selectgearmotors/vehicle/application/api/dto/**,
+            src/main/java/br/com/selectgearmotors/vehicle/application/api/mapper/**,
+            src/main/java/br/com/selectgearmotors/vehicle/application/database/mapper/**,
+            src/main/java/br/com/selectgearmotors/vehicle/commons/config/**,
+            src/main/java/br/com/selectgearmotors/vehicle/commons/util/**,
+            src/main/java/br/com/selectgearmotors/vehicle/commons/exception/**,
+            src/main/java/br/com/selectgearmotors/vehicle/core/utils/**,
+            src/main/java/br/com/selectgearmotors/vehicle/core/ports/**,
+            src/main/java/br/com/selectgearmotors/vehicle/commons/Constants.java,
         </sonar.coverage.exclusions>
         <sonar.dependencyCheck.basePath>${project.basedir}/owasp-dependency-check-logs</sonar.dependencyCheck.basePath>
         <sonar.dependencyCheck.htmlReportPath>${sonar.dependencyCheck.basePath}/dependency-check-report.html</sonar.dependencyCheck.htmlReportPath>
