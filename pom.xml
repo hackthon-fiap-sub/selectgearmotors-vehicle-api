@@ -20,7 +20,7 @@
         <maven.compiler.release>17</maven.compiler.release>
         <mapstruct.version>1.5.3.Final</mapstruct.version>
         <jacoco.version>0.8.12</jacoco.version>
-        <sonar.coverage.jacoco.xmlReportPaths>../app-it/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+        <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
         <sonar.exclusions>
             **/controller/debug/**/*,
             src/test/**/*,
