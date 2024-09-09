@@ -1,14 +1,14 @@
 package br.com.selectgearmotors.vehicle.repository;
 
 import br.com.selectgearmotors.vehicle.infrastructure.entity.brand.BrandEntity;
+import br.com.selectgearmotors.vehicle.infrastructure.entity.domain.MediaType;
+import br.com.selectgearmotors.vehicle.infrastructure.entity.domain.VehicleFuel;
 import br.com.selectgearmotors.vehicle.infrastructure.entity.domain.VehicleStatus;
+import br.com.selectgearmotors.vehicle.infrastructure.entity.media.MediaEntity;
 import br.com.selectgearmotors.vehicle.infrastructure.entity.model.ModelEntity;
 import br.com.selectgearmotors.vehicle.infrastructure.entity.vehicle.VehicleEntity;
-import br.com.selectgearmotors.vehicle.infrastructure.entity.vehicletype.VehicleTypeEntity;
-import br.com.selectgearmotors.vehicle.infrastructure.repository.BrandRepository;
-import br.com.selectgearmotors.vehicle.infrastructure.repository.ModelRepository;
-import br.com.selectgearmotors.vehicle.infrastructure.repository.VehicleRepository;
-import br.com.selectgearmotors.vehicle.infrastructure.repository.VehicleTypeRepository;
+import br.com.selectgearmotors.vehicle.infrastructure.entity.vehiclecategory.VehicleCategoryEntity;
+import br.com.selectgearmotors.vehicle.infrastructure.repository.*;
 import com.github.javafaker.Faker;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,7 +39,7 @@ class VehicleRepositoryTest {
     private VehicleRepository vehicleRepository;
 
     @Autowired
-    private VehicleTypeRepository vehicleTypeRepository;
+    private VehicleCategoryRepository vehicleCategoryRepository;
 
     @Autowired
     private BrandRepository brandRepository;
@@ -47,11 +47,16 @@ class VehicleRepositoryTest {
     @Autowired
     private ModelRepository modelRepository;
 
+    @Autowired
+    private MediaRepository mediaRepository;
+
     private BrandEntity brandEntity;
 
     private ModelEntity modelEntity;
 
-    private VehicleTypeEntity vehicleTypeEntity;
+    private MediaEntity mediaEntity;
+
+    private VehicleCategoryEntity vehicleCategoryEntity;
 
     private VehicleEntity vehicleEntity;
 
@@ -61,18 +66,28 @@ class VehicleRepositoryTest {
     void setUp() {
         log.info("Cleaning up database...");
         vehicleRepository.deleteAll();
-        vehicleTypeRepository.deleteAll();
+        vehicleCategoryRepository.deleteAll();
         modelRepository.deleteAll();
         brandRepository.deleteAll();
+        modelRepository.deleteAll();
 
         log.info("Setting up test data...");
         this.brandEntity = brandRepository.save(getBrand());
-        this.vehicleTypeEntity = vehicleTypeRepository.save(getVehicleType());
+        this.vehicleCategoryEntity = vehicleCategoryRepository.save(getVehicleCategory());
         this.modelEntity = modelRepository.save(getModel(this.brandEntity));
+        this.mediaEntity = mediaRepository.save(getMedia());
 
-        VehicleEntity vehicle = getVehicle(this.modelEntity, this.vehicleTypeEntity);
+        VehicleEntity vehicle = getVehicle(this.mediaEntity, this.modelEntity, this.vehicleCategoryEntity);
         this.vehicleEntity = vehicleRepository.save(vehicle);
         log.info("VehicleEntity - saved :{}", this.vehicleEntity);
+    }
+
+    private MediaEntity getMedia() {
+        return MediaEntity.builder()
+                .name(faker.food().ingredient())
+                .path(faker.internet().url())
+                .mediaType(MediaType.JPG)
+                .build();
     }
 
     private ModelEntity getModel(BrandEntity brandEntity) {
@@ -88,43 +103,25 @@ class VehicleRepositoryTest {
                 .build();
     }
 
-    private VehicleEntity getVehicle(ModelEntity modelEntity, VehicleTypeEntity vehicleTypeEntity) {
+    private VehicleEntity getVehicle(MediaEntity mediaEntity, ModelEntity modelEntity, VehicleCategoryEntity vehicleCategoryEntity) {
         return VehicleEntity.builder()
                 .cor("Azul")
                 .code(UUID.randomUUID().toString())
-                .pic("hhh")
                 .price(BigDecimal.TEN)
                 .description("Coca-Cola")
-                .vehicleTypeEntity(vehicleTypeEntity)
+                .vehicleCategoryEntity(vehicleCategoryEntity)
                 .modelEntity(modelEntity)
                 .vehicleStatus(VehicleStatus.AVAILABLE)
+                .location("São Paulo")
+                .vehicleFuel(VehicleFuel.FLEX)
+                .vehicleYear(2021)
+                .km(1000)
+                .mediaEntity(mediaEntity)
                 .build();
     }
 
-    private VehicleEntity getVehicle1(BrandEntity brandEntity, VehicleTypeEntity vehicleTypeEntity) {
-        return VehicleEntity.builder()
-                .cor(faker.food().vegetable())
-                .code(UUID.randomUUID().toString())
-                .pic("hhh")
-                .price(BigDecimal.TEN)
-                .vehicleTypeEntity(vehicleTypeEntity)
-                .vehicleStatus(VehicleStatus.AVAILABLE)
-                .build();
-    }
-
-    private VehicleEntity getVehicle2(BrandEntity brandEntity, VehicleTypeEntity vehicleTypeEntity) {
-        return VehicleEntity.builder()
-                .cor(faker.food().vegetable())
-                .code(UUID.randomUUID().toString())
-                .pic("hhh")
-                .price(BigDecimal.TEN)
-                .vehicleTypeEntity(vehicleTypeEntity)
-                .vehicleStatus(VehicleStatus.AVAILABLE)
-                .build();
-    }
-
-    private VehicleTypeEntity getVehicleType() {
-        return VehicleTypeEntity.builder()
+    private VehicleCategoryEntity getVehicleCategory() {
+        return VehicleCategoryEntity.builder()
                 .name(faker.food().ingredient())
                 .build();
     }
@@ -165,14 +162,15 @@ class VehicleRepositoryTest {
     void should_delete_all_vehicles() {
         log.info("Cleaning up database...");
         vehicleRepository.deleteAll();
-        vehicleTypeRepository.deleteAll();
+        vehicleCategoryRepository.deleteAll();
         brandRepository.deleteAll();
 
         var brand = brandRepository.save(getBrand());
         var model = modelRepository.save(getModel(brand));
-        var vehicleTypeEntity1 = vehicleTypeRepository.save(getVehicleType());
+        var media = mediaRepository.save(getMedia());
+        var vehicleCategoryEntity1 = vehicleCategoryRepository.save(getVehicleCategory());
 
-        vehicleRepository.save(getVehicle(model, vehicleTypeEntity1));
+        vehicleRepository.save(getVehicle(media, model, vehicleCategoryEntity1));
         vehicleRepository.deleteAll();
 
         Iterable<VehicleEntity> vehicles = vehicleRepository.findAll();
@@ -189,16 +187,17 @@ class VehicleRepositoryTest {
     @Disabled
     void givenSetOfVehicles_whenFindAll_thenReturnAllVehicles() {
         vehicleRepository.deleteAll();
-        vehicleTypeRepository.deleteAll();
+        vehicleCategoryRepository.deleteAll();
         brandRepository.deleteAll();
 
         List<VehicleEntity> all = vehicleRepository.findAll();
         log.info(all.toString());
 
         BrandEntity restaurant1 = brandRepository.save(getBrand());
-        VehicleTypeEntity vehicleTypeEntity1 = vehicleTypeRepository.save(getVehicleType());
+        VehicleCategoryEntity vehicleCategoryEntity1 = vehicleCategoryRepository.save(getVehicleCategory());
+        var media = mediaRepository.save(getMedia());
 
-        VehicleEntity vehicle = getVehicle(getModel(this.brandEntity), vehicleTypeEntity1);
+        VehicleEntity vehicle = getVehicle(media, getModel(this.brandEntity), vehicleCategoryEntity1);
         log.info("VehicleEntity:{}", vehicle);
         VehicleEntity vehicle1 = vehicleRepository.save(vehicle);
 
@@ -215,21 +214,20 @@ class VehicleRepositoryTest {
         VehicleEntity vehicleEntity = new VehicleEntity();
         vehicleEntity.setCor("a".repeat(260)); // Nome com 260 caracteres, excedendo o limite de 255
         vehicleEntity.setCode(UUID.randomUUID().toString());
-        vehicleEntity.setPic("hhh");
         vehicleEntity.setPrice(BigDecimal.TEN);
         vehicleEntity.setDescription("Coca-Cola");
-        vehicleEntity.setVehicleTypeEntity(vehicleTypeEntity);
+        vehicleEntity.setVehicleCategoryEntity(vehicleCategoryEntity);
 
         assertThrows(DataIntegrityViolationException.class, () -> {
             vehicleRepository.save(vehicleEntity);
         });
     }
 
-    private VehicleEntity createInvalidVehicleType() {
-        VehicleEntity vehicleTypeEntity = new VehicleEntity();
-        // Configurar o vehicleTypeEntity com valores inválidos
+    private VehicleEntity createInvalidVehicleCategory() {
+        VehicleEntity vehicleCategoryEntity = new VehicleEntity();
+        // Configurar o vehicleCategoryEntity com valores inválidos
         // Exemplo: valores inválidos que podem causar uma ConstraintViolationException
-        vehicleTypeEntity.setCor(""); // Nome vazio pode causar uma violação
-        return vehicleTypeEntity;
+        vehicleCategoryEntity.setCor(""); // Nome vazio pode causar uma violação
+        return vehicleCategoryEntity;
     }
 }

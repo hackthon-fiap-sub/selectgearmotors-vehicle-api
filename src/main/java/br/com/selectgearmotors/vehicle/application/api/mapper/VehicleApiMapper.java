@@ -13,11 +13,12 @@ import java.util.List;
 public interface VehicleApiMapper {
 
     @Mapping(source = "cor", target = "cor")
-    @Mapping(source = "pic", target = "pic")
+    @Mapping(source = "mediaId", target = "mediaId")
     @Mapping(source = "vehicleYear", target = "vehicleYear")
+    @Mapping(source = "km", target = "km")
     @Mapping(source = "description", target = "description")
     @Mapping(source = "price", target = "price")
-    @Mapping(source = "vehicleTypeId", target = "vehicleTypeId")
+    @Mapping(source = "vehicleCategoryId", target = "vehicleCategoryId")
     @Mapping(source = "modelId", target = "modelId")
     @Mapping(source = "vehicleStatus", target = "vehicleStatus")
     Vehicle fromRequest(VehicleRequest request);
@@ -25,8 +26,8 @@ public interface VehicleApiMapper {
     @InheritInverseConfiguration
     @Mapping(target = "id", source = "id")
     @Mapping(target = "code", source = "code")
-    @Mapping(target = "vehicleTypeId", source = "vehicleTypeId")
-    @Mapping(target = "vehicleTypeName", source = "vehicleTypeName")
+    @Mapping(target = "vehicleCategoryId", source = "vehicleCategoryId")
+    @Mapping(target = "vehicleCategoryName", source = "vehicleCategoryName")
     @Mapping(target = "modelId", source = "modelId")
     @Mapping(target = "modelName", source = "modelName")
     @Mapping(target = "brandId", source = "brandId")

@@ -1,10 +1,6 @@
 package br.com.selectgearmotors.vehicle.application.api.dto.response;
 
-import br.com.selectgearmotors.vehicle.infrastructure.entity.brand.BrandEntity;
 import br.com.selectgearmotors.vehicle.infrastructure.entity.domain.VehicleStatus;
-import br.com.selectgearmotors.vehicle.infrastructure.entity.model.ModelEntity;
-import br.com.selectgearmotors.vehicle.infrastructure.entity.vehicletype.VehicleTypeEntity;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.persistence.*;
@@ -14,7 +10,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.mapstruct.Mapping;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -42,7 +37,7 @@ public class VehicleResponse implements Serializable {
 
     @Schema(description = "picture of the Product.",
             example = "V$")
-    private String pic;
+    private Long mediaId;
 
     @Schema(description = "picture of the Product.",
             example = "V$")
@@ -61,9 +56,9 @@ public class VehicleResponse implements Serializable {
     @Schema(description = "Restaurant of the User.",
             example = "1", ref = "ProductCategoryEntity")
     @NotNull
-    private Long vehicleTypeId;
+    private Long vehicleCategoryId;
 
-    private String vehicleTypeName;
+    private String vehicleCategoryName;
 
     @Schema(description = "Restaurant of the User.",
             example = "1", ref = "RestaurantEntity")
@@ -79,4 +74,6 @@ public class VehicleResponse implements Serializable {
     @Schema(description = "Status of the Product.",
             example = "ACTIVE")
     private VehicleStatus vehicleStatus;
+
+    private String location;
 }

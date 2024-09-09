@@ -13,12 +13,13 @@ docker rmi $(docker images -qa) -f
 sudo sysctl -w vm.max_map_count=262144
 
 
-docker build -t rogeriofontes/sevenfood-product-api:v3 .
+docker build -t rogeriofontes/selectgearmotors-vehicle-api:v3 .
 docker login
-docker push rogeriofontes/sevenfood-product-api:v3
+docker push rogeriofontes/selectgearmotors-vehicle-api:v3
 
-docker pull rogeriofontes/sevenfood-product-api:v3
-docker run -p 9924:9924 sevenfood-product-api:v3
+docker pull rogeriofontes/selectgearmotors-vehicle-api:v3
+docker run -p 9924:9924 rogeriofontes/selectgearmotors-vehicle-api:v3
+docker run -p 9924:9924 --env-file .env -e SPRING_PROFILES_ACTIVE=dev rogeriofontes/selectgearmotors-vehicle-api:v3
 
 ====
 https://www.zaproxy.org/docs/docker/api-scan/
@@ -31,3 +32,21 @@ http://localhost:9914/api/swagger-ui/index.html#/
 http://localhost:9914/api/v3/api-docs
 
 docker run -u zap -p 8080:8080 -v "$(pwd)/docs/zap_workdir:/zap/wrk" -i ghcr.io/zaproxy/zaproxy:stable zap-api-scan.py -t http://192.168.100.31:9924/api/v3/api-docs -f openapi -c zap-rules.conf -r zap_report_antes_op1.html
+
+Dominio para ajustar:
+
+Veiculos--
+Marca
+Modelo
+tipo - (Carro, Moto, Caminhão/Onibus)
+Ano
+Combustivel (Gasolina, etanol, flex, Eletrico)
+KM
+Descricao - falar um pouco sobre o carro.
+foto
+preço
+categoria (Camionete, Hat)
+codigo
+manual-automatico
+local
+

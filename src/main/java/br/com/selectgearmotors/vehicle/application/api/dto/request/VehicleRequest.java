@@ -1,7 +1,12 @@
 package br.com.selectgearmotors.vehicle.application.api.dto.request;
 
+import br.com.selectgearmotors.vehicle.infrastructure.entity.domain.VehicleFuel;
+import br.com.selectgearmotors.vehicle.infrastructure.entity.domain.VehicleType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.persistence.Column;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -28,11 +33,15 @@ public class VehicleRequest implements Serializable {
 
     @Schema(description = "picture of the Product.",
             example = "V$")
-    private String pic;
+    private Long mediaId;
 
     @Schema(description = "picture of the Product.",
             example = "V$")
     private int vehicleYear;
+
+    @Schema(description = "picture of the Product.",
+            example = "V$")
+    private int km;
 
     @Schema(description = "description of the Product.",
             example = "V$")
@@ -47,7 +56,7 @@ public class VehicleRequest implements Serializable {
     @Schema(description = "Restaurant of the User.",
             example = "1", ref = "ProductCategoryEntity")
     @NotNull
-    private Long vehicleTypeId;
+    private Long vehicleCategoryId;
 
     @Schema(description = "Restaurant of the User.",
             example = "1", ref = "RestaurantEntity")
@@ -56,4 +65,14 @@ public class VehicleRequest implements Serializable {
     @Schema(description = "Status of the Product.",
             example = "ACTIVE")
     private String vehicleStatus;
+
+    @Schema(description = "Status of the Product.",
+            example = "ACTIVE")
+    private String vehicleType;
+
+    @Schema(description = "Status of the Product.",
+            example = "ACTIVE")
+    private String vehicleFuel;
+
+    private String location;
 }

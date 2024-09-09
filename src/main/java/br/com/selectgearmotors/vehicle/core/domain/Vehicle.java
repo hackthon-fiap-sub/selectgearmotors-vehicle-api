@@ -1,7 +1,13 @@
 package br.com.selectgearmotors.vehicle.core.domain;
 
+import br.com.selectgearmotors.vehicle.infrastructure.entity.domain.VehicleFuel;
+import br.com.selectgearmotors.vehicle.infrastructure.entity.domain.VehicleType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.persistence.Column;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -38,15 +44,17 @@ public class Vehicle implements Serializable {
             example = "V$")
     private BigDecimal price;
 
-    @Schema(description = "name of the Product.",
-            example = "V$")
-    private String pic;
+    private int km;
 
     @Schema(description = "name of the Product.",
             example = "V$")
-    private Long vehicleTypeId;
+    private Long mediaId;
 
-    private String vehicleTypeName;
+    @Schema(description = "name of the Product.",
+            example = "V$")
+    private Long vehicleCategoryId;
+
+    private String vehicleCategoryName;
 
     private Long brandId;
 
@@ -60,6 +68,19 @@ public class Vehicle implements Serializable {
 
     private String vehicleStatus;
 
+    @Schema(description = "Status of the Product.",
+            example = "ACTIVE")
+    private String vehicleType;
+
+    @Schema(description = "Status of the Product.",
+            example = "ACTIVE")
+    private String vehicleFuel;
+
+    @Schema(description = "description of the Product.",
+            example = "V$")
+    @Size(min = 0, max = 255)
+    private String location;
+
     public void update(Long id, Vehicle vehicle) {
         this.id = id;
         this.code = vehicle.getCode();
@@ -67,9 +88,10 @@ public class Vehicle implements Serializable {
         this.vehicleYear = vehicle.getVehicleYear();
         this.description = vehicle.getDescription();
         this.price = vehicle.getPrice();
-        this.pic = vehicle.getPic();
-        this.vehicleTypeId = vehicle.getVehicleTypeId();
+        this.mediaId = vehicle.getMediaId();
+        this.vehicleCategoryId = vehicle.getVehicleCategoryId();
         this.modelId = vehicle.getModelId();
         this.vehicleStatus = vehicle.getVehicleStatus();
+        this.location = vehicle.getLocation();
     }
 }

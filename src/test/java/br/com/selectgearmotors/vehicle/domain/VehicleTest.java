@@ -18,8 +18,7 @@ public class VehicleTest {
         vehicle.setCor("VehicleName");
         vehicle.setDescription("Description");
         vehicle.setPrice(new BigDecimal("10000"));
-        vehicle.setPic("pic.jpg");
-        vehicle.setVehicleTypeId(1L);
+        vehicle.setVehicleCategoryId(1L);
         vehicle.setModelId(3L);
         vehicle.setVehicleStatus("ACTIVE");
 
@@ -29,8 +28,7 @@ public class VehicleTest {
         assertEquals("VehicleName", vehicle.getCor());
         assertEquals("Description", vehicle.getDescription());
         assertEquals(new BigDecimal("10000"), vehicle.getPrice());
-        assertEquals("pic.jpg", vehicle.getPic());
-        assertEquals(1L, vehicle.getVehicleTypeId());
+        assertEquals(1L, vehicle.getVehicleCategoryId());
         assertEquals(3L, vehicle.getModelId());
         assertEquals("ACTIVE", vehicle.getVehicleStatus());
     }

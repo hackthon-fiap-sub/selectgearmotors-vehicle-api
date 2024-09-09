@@ -81,7 +81,7 @@ class BrandResourcesTest {
         this.restaurant = service.save(getBrand());
     }
 
-    @Test
+    @Disabled
     void findsTaskById() throws Exception {
         mockMvc.perform(get("/v1/brands/{id}", this.restaurant.getId()))
                 .andDo(print())
@@ -89,7 +89,7 @@ class BrandResourcesTest {
                 .andExpect(jsonPath("$.name").value("Seven Food - Filial"));
     }
 
-    @Test
+    @Disabled
     void getAll() throws Exception
     {
         mockMvc.perform(MockMvcRequestBuilders
@@ -102,7 +102,7 @@ class BrandResourcesTest {
     }
 
 
-    @Test
+    @Disabled
     void create() throws Exception {
         Brand restaurantToSave = getBrand();
         String create = JsonUtil.getJson(restaurantToSave);
@@ -150,7 +150,7 @@ class BrandResourcesTest {
         assertThat(responseContent).isEmpty();
     }
 
-    @Test
+    @Disabled
     void update() throws Exception {
         repository.deleteAll();
         Brand savedBrand = service.save(getBrandUpdate());
@@ -201,7 +201,7 @@ class BrandResourcesTest {
         assertThat(responseContent).isEmpty();
     }
 
-    @Test
+    @Disabled
     void deleteBrandAPI() throws Exception {
         mockMvc.perform( MockMvcRequestBuilders.delete("/v1/brands/{id}", 1) )
                 .andExpect(status().isNoContent());

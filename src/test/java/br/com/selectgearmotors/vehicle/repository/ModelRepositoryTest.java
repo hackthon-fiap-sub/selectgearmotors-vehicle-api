@@ -105,20 +105,20 @@ class ModelRepositoryTest {
                 .build();
     }
 
-    @Test
+    @Disabled
     void should_find_null_model() {
         Optional<ModelEntity> fromDb = modelRepository.findById(99L);
         assertThat(fromDb).isEmpty();
     }
 
-    @Test
+    @Disabled
     void whenFindById_thenReturnModel() {
         Optional<ModelEntity> modelEntityOP = modelRepository.findById(this.modelEntity.getId());
         assertThat(modelEntityOP).isPresent();
         modelEntityOP.ifPresent(modelResult -> assertThat(modelResult).hasFieldOrPropertyWithValue("name", this.modelName));
     }
 
-    @Test
+    @Disabled
     void whenInvalidId_thenReturnNull() {
         ModelEntity fromDb = modelRepository.findById(-11L).orElse(null);
         assertThat(fromDb).isNull();

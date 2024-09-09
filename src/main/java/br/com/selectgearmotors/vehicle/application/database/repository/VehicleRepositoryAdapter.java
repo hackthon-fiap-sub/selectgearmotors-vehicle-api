@@ -25,7 +25,7 @@ public class VehicleRepositoryAdapter implements VehicleRepositoryPort {
     @Override
     public Vehicle save(Vehicle vehicle) {
         try {
-            VehicleEntity vehicleEntity = vehicleMapper.fromModelTpEntity(vehicle);
+            VehicleEntity vehicleEntity = vehicleMapper.fromModelToEntity(vehicle);
             if (vehicleEntity != null) {
                 vehicleEntity.setCode(UUID.randomUUID().toString());
                 VehicleEntity saved = vehicleRepository.save(vehicleEntity);

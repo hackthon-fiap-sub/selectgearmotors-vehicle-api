@@ -4,11 +4,11 @@ import br.com.selectgearmotors.vehicle.application.database.mapper.VehicleMapper
 import br.com.selectgearmotors.vehicle.core.domain.Brand;
 import br.com.selectgearmotors.vehicle.core.domain.Model;
 import br.com.selectgearmotors.vehicle.core.domain.Vehicle;
-import br.com.selectgearmotors.vehicle.core.domain.VehicleType;
+import br.com.selectgearmotors.vehicle.core.domain.VehicleCategory;
 import br.com.selectgearmotors.vehicle.infrastructure.entity.brand.BrandEntity;
 import br.com.selectgearmotors.vehicle.infrastructure.entity.model.ModelEntity;
 import br.com.selectgearmotors.vehicle.infrastructure.entity.vehicle.VehicleEntity;
-import br.com.selectgearmotors.vehicle.infrastructure.entity.vehicletype.VehicleTypeEntity;
+import br.com.selectgearmotors.vehicle.infrastructure.entity.vehiclecategory.VehicleCategoryEntity;
 import br.com.selectgearmotors.vehicle.infrastructure.repository.VehicleRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.exception.DataException;
@@ -54,80 +54,74 @@ class VehicleRepositoryAdapterTest {
                 .build();
     }
 
-    private VehicleEntity getVehicleEntity(BrandEntity brandEntity, ModelEntity modelEntity, VehicleTypeEntity vehicleTypeEntity) {
+    private VehicleEntity getVehicleEntity(BrandEntity brandEntity, ModelEntity modelEntity, VehicleCategoryEntity vehicleCategoryEntity) {
         return VehicleEntity.builder()
                 .cor("Bebida")
                 .code(UUID.randomUUID().toString())
-                .pic("hhh")
                 .price(BigDecimal.TEN)
                 .description("Coca-Cola")
-                .vehicleTypeEntity(vehicleTypeEntity)
+                .vehicleCategoryEntity(vehicleCategoryEntity)
                 .modelEntity(modelEntity)
                 .build();
     }
 
-    private VehicleEntity getVehicleEntity1(BrandEntity brandEntity, ModelEntity modelEntity, VehicleTypeEntity vehicleTypeEntity) {
+    private VehicleEntity getVehicleEntity1(BrandEntity brandEntity, ModelEntity modelEntity, VehicleCategoryEntity vehicleCategoryEntity) {
         return VehicleEntity.builder()
                 .cor("Bebida")
                 .code(UUID.randomUUID().toString())
-                .pic("hhh")
                 .price(BigDecimal.TEN)
                 .description("Coca-Cola")
-                .vehicleTypeEntity(vehicleTypeEntity)
+                .vehicleCategoryEntity(vehicleCategoryEntity)
                 .modelEntity(modelEntity)
                 .build();
     }
 
-    private VehicleEntity getVehicleEntity2(BrandEntity brandEntity, ModelEntity modelEntity, VehicleTypeEntity vehicleTypeEntity) {
+    private VehicleEntity getVehicleEntity2(BrandEntity brandEntity, ModelEntity modelEntity, VehicleCategoryEntity vehicleCategoryEntity) {
         return VehicleEntity.builder()
                 .cor("Bebida")
                 .code(UUID.randomUUID().toString())
-                .pic("hhh")
                 .price(BigDecimal.TEN)
                 .description("Coca-Cola")
-                .vehicleTypeEntity(vehicleTypeEntity)
+                .vehicleCategoryEntity(vehicleCategoryEntity)
                 .modelEntity(modelEntity)
                 .build();
     }
 
-    private Vehicle getVehicle(Brand brand, Model model, VehicleType vehicleType) {
+    private Vehicle getVehicle(Brand brand, Model model, VehicleCategory vehicleCategory) {
         return Vehicle.builder()
                 .cor("Bebida")
                 .code(UUID.randomUUID().toString())
-                .pic("hhh")
                 .price(BigDecimal.TEN)
                 .description("Coca-Cola")
-                .vehicleTypeId(vehicleType.getId())
+                .vehicleCategoryId(vehicleCategory.getId())
                 .modelId(model.getId())
                 .build();
     }
 
-    private Vehicle getVehicle1(Model model, VehicleType vehicleType) {
+    private Vehicle getVehicle1(Model model, VehicleCategory vehicleCategory) {
         return Vehicle.builder()
                 .cor("Bebida 1")
                 .code(UUID.randomUUID().toString())
-                .pic("hhh")
                 .price(BigDecimal.TEN)
                 .description("Coca-Cola")
-                .vehicleTypeId(vehicleType.getId())
+                .vehicleCategoryId(vehicleCategory.getId())
                 .modelId(model.getId())
                 .build();
     }
 
-    private Vehicle getVehicle2(Model model, VehicleType vehicleType) {
+    private Vehicle getVehicle2(Model model, VehicleCategory vehicleCategory) {
         return Vehicle.builder()
                 .cor("Bebida 1")
                 .code(UUID.randomUUID().toString())
-                .pic("hhh")
                 .price(BigDecimal.TEN)
                 .description("Coca-Cola")
-                .vehicleTypeId(vehicleType.getId())
+                .vehicleCategoryId(vehicleCategory.getId())
                 .modelId(model.getId())
                 .build();
     }
 
-    private VehicleTypeEntity getVehicleTypeEntity() {
-        return VehicleTypeEntity.builder()
+    private VehicleCategoryEntity getVehicleTypeEntity() {
+        return VehicleCategoryEntity.builder()
                 .name("Bebida")
                 .build();
     }
@@ -138,8 +132,8 @@ class VehicleRepositoryAdapterTest {
                 .build();
     }
 
-    private VehicleType getVehicleType() {
-        return VehicleType.builder()
+    private VehicleCategory getVehicleType() {
+        return VehicleCategory.builder()
                 .name("Bebida")
                 .build();
     }
@@ -174,10 +168,9 @@ class VehicleRepositoryAdapterTest {
         VehicleEntity vehicleEntity = new VehicleEntity();
         vehicleEntity.setCor("a".repeat(260)); // Nome com 260 caracteres, excedendo o limite de 255
         vehicleEntity.setCode(UUID.randomUUID().toString());
-        vehicleEntity.setPic("hhh");
         vehicleEntity.setPrice(BigDecimal.TEN);
         vehicleEntity.setDescription("Coca-Cola");
-        vehicleEntity.setVehicleTypeEntity(getVehicleTypeEntity());
+        vehicleEntity.setVehicleCategoryEntity(getVehicleTypeEntity());
         vehicleEntity.setModelEntity(getModelEntity());
 
         // Simulando o lançamento de uma exceção

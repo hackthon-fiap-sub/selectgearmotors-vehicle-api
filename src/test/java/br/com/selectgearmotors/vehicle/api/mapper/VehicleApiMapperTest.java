@@ -23,11 +23,10 @@ public class VehicleApiMapperTest {
         // Arrange
         VehicleRequest request = new VehicleRequest();
         request.setCor("Red");
-        request.setPic("pic.jpg");
         request.setVehicleYear(2021);
         request.setDescription("Description");
         request.setPrice(new BigDecimal("10000"));
-        request.setVehicleTypeId(1L);
+        request.setVehicleCategoryId(1L);
         request.setModelId(2L);
         request.setVehicleStatus("ACTIVE");
 
@@ -37,11 +36,10 @@ public class VehicleApiMapperTest {
         // Assert
         assertNotNull(vehicle);
         assertEquals(request.getCor(), vehicle.getCor());
-        assertEquals(request.getPic(), vehicle.getPic());
         assertEquals(request.getVehicleYear(), vehicle.getVehicleYear());
         assertEquals(request.getDescription(), vehicle.getDescription());
         assertEquals(request.getPrice(), vehicle.getPrice());
-        assertEquals(request.getVehicleTypeId(), vehicle.getVehicleTypeId());
+        assertEquals(request.getVehicleCategoryId(), vehicle.getVehicleCategoryId());
         assertEquals(request.getModelId(), vehicle.getModelId());
         assertEquals(request.getVehicleStatus(), vehicle.getVehicleStatus());
     }
@@ -53,11 +51,10 @@ public class VehicleApiMapperTest {
         vehicle.setId(1L);
         vehicle.setCode("V123");
         vehicle.setCor("Red");
-        vehicle.setPic("pic.jpg");
         vehicle.setVehicleYear(2021);
         vehicle.setDescription("Description");
         vehicle.setPrice(new BigDecimal("10000"));
-        vehicle.setVehicleTypeId(1L);
+        vehicle.setVehicleCategoryId(1L);
         vehicle.setModelId(2L);
         vehicle.setVehicleStatus("ACTIVE");
 
@@ -69,7 +66,6 @@ public class VehicleApiMapperTest {
         assertEquals(vehicle.getId(), response.getId());
         assertEquals(vehicle.getCode(), response.getCode());
         assertEquals(vehicle.getCor(), response.getCor());
-        assertEquals(vehicle.getPic(), response.getPic());
         assertEquals(vehicle.getVehicleYear(), response.getVehicleYear());
         assertEquals(vehicle.getDescription(), response.getDescription());
         assertEquals(vehicle.getPrice(), response.getPrice());
@@ -83,11 +79,10 @@ public class VehicleApiMapperTest {
         vehicle1.setId(1L);
         vehicle1.setCode("V123");
         vehicle1.setCor("Red");
-        vehicle1.setPic("pic1.jpg");
         vehicle1.setVehicleYear(2021);
         vehicle1.setDescription("Description1");
         vehicle1.setPrice(new BigDecimal("10000"));
-        vehicle1.setVehicleTypeId(1L);
+        vehicle1.setVehicleCategoryId(1L);
         vehicle1.setModelId(2L);
         vehicle1.setVehicleStatus("ACTIVE");
 
@@ -95,11 +90,10 @@ public class VehicleApiMapperTest {
         vehicle2.setId(2L);
         vehicle2.setCode("V124");
         vehicle2.setCor("Blue");
-        vehicle2.setPic("pic2.jpg");
         vehicle2.setVehicleYear(2022);
         vehicle2.setDescription("Description2");
         vehicle2.setPrice(new BigDecimal("20000"));
-        vehicle2.setVehicleTypeId(3L);
+        vehicle2.setVehicleCategoryId(3L);
         vehicle2.setModelId(4L);
         //vehicle2.setVehicleStatus("INACTIVE");
 
@@ -116,7 +110,6 @@ public class VehicleApiMapperTest {
         assertEquals(vehicle1.getId(), responseList.get(0).getId());
         assertEquals(vehicle1.getCode(), responseList.get(0).getCode());
         assertEquals(vehicle1.getCor(), responseList.get(0).getCor());
-        assertEquals(vehicle1.getPic(), responseList.get(0).getPic());
         assertEquals(vehicle1.getVehicleYear(), responseList.get(0).getVehicleYear());
         assertEquals(vehicle1.getDescription(), responseList.get(0).getDescription());
         assertEquals(vehicle1.getPrice(), responseList.get(0).getPrice());
@@ -124,7 +117,6 @@ public class VehicleApiMapperTest {
         assertEquals(vehicle2.getId(), responseList.get(1).getId());
         assertEquals(vehicle2.getCode(), responseList.get(1).getCode());
         assertEquals(vehicle2.getCor(), responseList.get(1).getCor());
-        assertEquals(vehicle2.getPic(), responseList.get(1).getPic());
         assertEquals(vehicle2.getVehicleYear(), responseList.get(1).getVehicleYear());
         assertEquals(vehicle2.getDescription(), responseList.get(1).getDescription());
         assertEquals(vehicle2.getPrice(), responseList.get(1).getPrice());

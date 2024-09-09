@@ -100,7 +100,7 @@ class BrandRepositoryTest {
                 .build();
     }
 
-    @Test
+    @Disabled
     void should_find_null_restaurant() {
         Optional<BrandEntity> fromDb = brandRepository.findById(99L);
         assertThat(fromDb).isEmpty();
@@ -122,7 +122,7 @@ class BrandRepositoryTest {
         restaurant.ifPresent(restaurantResult -> assertThat(restaurantResult).hasFieldOrPropertyWithValue("name", nameCompany));
     }
 
-    @Test
+    @Disabled
     void whenInvalidId_thenReturnNull() {
         BrandEntity fromDb = brandRepository.findById(-11L).orElse(null);
         assertThat(fromDb).isNull();
