@@ -81,6 +81,21 @@ public class Vehicle implements Serializable {
     @Size(min = 0, max = 255)
     private String location;
 
+    @Schema(description = "description of the Product.",
+            example = "V$")
+    @Size(min = 0, max = 255)
+    private String plate;
+
+    @Schema(description = "description of the Product.",
+            example = "V$")
+    @Size(min = 0, max = 255)
+    private String chassis;
+
+    @Schema(description = "description of the Product.",
+            example = "V$")
+    @Size(min = 0, max = 255)
+    private String renavam;
+
     public void update(Long id, Vehicle vehicle) {
         this.id = id;
         this.code = vehicle.getCode();
@@ -93,5 +108,8 @@ public class Vehicle implements Serializable {
         this.modelId = vehicle.getModelId();
         this.vehicleStatus = vehicle.getVehicleStatus();
         this.location = vehicle.getLocation();
+        this.plate = vehicle.getPlate();
+        this.chassis = vehicle.getChassis();
+        this.renavam = vehicle.getRenavam();
     }
 }

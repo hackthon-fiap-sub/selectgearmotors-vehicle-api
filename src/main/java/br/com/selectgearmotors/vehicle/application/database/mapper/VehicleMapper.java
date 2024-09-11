@@ -23,6 +23,9 @@ public interface VehicleMapper {
     @Mapping(source = "vehicleFuel", target = "vehicleFuel")
     @Mapping(source = "mediaId", target = "mediaEntity.id")
     @Mapping(source = "location", target = "location")
+    @Mapping(source = "plate", target = "plate")
+    @Mapping(source = "chassis", target = "chassis")
+    @Mapping(source = "renavam", target = "renavam")
     VehicleEntity fromModelToEntity(Vehicle vehicle);
 
     @InheritInverseConfiguration

@@ -76,4 +76,19 @@ public class VehicleResponse implements Serializable {
     private VehicleStatus vehicleStatus;
 
     private String location;
+
+    @Schema(description = "description of the Product.",
+            example = "V$")
+    @Size(min = 0, max = 255)
+    private String plate;
+
+    @Schema(description = "description of the Product.",
+            example = "V$")
+    @Size(min = 0, max = 255)
+    private String chassis;
+
+    @Schema(description = "description of the Product.",
+            example = "V$")
+    @Size(min = 0, max = 255)
+    private String renavam;
 }

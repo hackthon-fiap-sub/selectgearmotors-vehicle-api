@@ -21,6 +21,9 @@ public interface VehicleApiMapper {
     @Mapping(source = "vehicleCategoryId", target = "vehicleCategoryId")
     @Mapping(source = "modelId", target = "modelId")
     @Mapping(source = "vehicleStatus", target = "vehicleStatus")
+    @Mapping(source = "plate", target = "plate")
+    @Mapping(source = "chassis", target = "chassis")
+    @Mapping(source = "renavam", target = "renavam")
     Vehicle fromRequest(VehicleRequest request);
 
     @InheritInverseConfiguration

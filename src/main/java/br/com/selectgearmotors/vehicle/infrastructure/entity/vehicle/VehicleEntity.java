@@ -118,6 +118,21 @@ public class VehicleEntity extends AuditDomain {
     @Size(min = 0, max = 255)
     private String location;
 
+    @Schema(description = "description of the Product.",
+            example = "V$")
+    @Size(min = 0, max = 255)
+    private String plate;
+
+    @Schema(description = "description of the Product.",
+            example = "V$")
+    @Size(min = 0, max = 255)
+    private String chassis;
+
+    @Schema(description = "description of the Product.",
+            example = "V$")
+    @Size(min = 0, max = 255)
+    private String renavam;
+
     public void update(Long id, VehicleEntity vehicleEntity) {
         this.id = id;
         this.code = vehicleEntity.getCode();
@@ -133,5 +148,8 @@ public class VehicleEntity extends AuditDomain {
         this.location = vehicleEntity.getLocation();
         this.vehicleFuel = vehicleEntity.getVehicleFuel();
         this.km = vehicleEntity.getKm();
+        this.plate = vehicleEntity.getPlate();
+        this.chassis = vehicleEntity.getChassis();
+        this.renavam = vehicleEntity.getRenavam();
     }
 }

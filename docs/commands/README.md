@@ -13,13 +13,13 @@ docker rmi $(docker images -qa) -f
 sudo sysctl -w vm.max_map_count=262144
 
 
-docker build -t rogeriofontes/selectgearmotors-vehicle-api:v3 .
+docker build -t rogeriofontes/selectgearmotors-vehicle-api:v4 .
 docker login
-docker push rogeriofontes/selectgearmotors-vehicle-api:v3
+docker push rogeriofontes/selectgearmotors-vehicle-api:v4
 
-docker pull rogeriofontes/selectgearmotors-vehicle-api:v3
-docker run -p 9924:9924 rogeriofontes/selectgearmotors-vehicle-api:v3
-docker run -p 9924:9924 --env-file .env -e SPRING_PROFILES_ACTIVE=dev rogeriofontes/selectgearmotors-vehicle-api:v3
+docker pull rogeriofontes/selectgearmotors-vehicle-api:v4
+docker run -p 9924:9924 rogeriofontes/selectgearmotors-vehicle-api:v4
+docker run -p 9924:9924 --env-file .env -e SPRING_PROFILES_ACTIVE=dev rogeriofontes/selectgearmotors-vehicle-api:v4
 
 ====
 https://www.zaproxy.org/docs/docker/api-scan/
