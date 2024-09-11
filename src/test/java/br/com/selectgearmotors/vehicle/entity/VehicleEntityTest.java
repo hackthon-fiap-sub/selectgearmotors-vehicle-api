@@ -21,7 +21,7 @@ public class VehicleEntityTest {
     @Test
     public void testConstructor() {
         // Arrange & Act
-        VehicleEntity entity = new VehicleEntity(1L, "V123",  "Red", 2022, 1233, "Description", new BigDecimal("10000"), new VehicleCategoryEntity(1L, "Automotor"), new ModelEntity(1L, "Flex", new BrandEntity(1L, "Ford")), VehicleStatus.AVAILABLE, VehicleType.CAR, VehicleFuel.FLEX, new MediaEntity(1L, "pic.jpg", "image/jpeg", MediaType.JPG), "Uberlândia");
+        VehicleEntity entity = new VehicleEntity(1L, "V123",  "Red", 2022, 1233, "Description", new BigDecimal("10000"), new VehicleCategoryEntity(1L, "Automotor"), new ModelEntity(1L, "Flex", new BrandEntity(1L, "Ford")), VehicleStatus.AVAILABLE, VehicleType.CAR, VehicleFuel.FLEX, new MediaEntity(1L, "pic.jpg", "image/jpeg", MediaType.JPG), "Uberlândia", "GZK-8775", "1HGCM82633A123456", "76015901475");
 
         // Assert
         assertEquals(1L, entity.getId());
@@ -66,7 +66,7 @@ public class VehicleEntityTest {
     @Test
     public void testToString() {
         // Arrange
-        VehicleEntity entity = new VehicleEntity(1L, "V123",  "Red", 2022, 1233, "Description", new BigDecimal("10000"), new VehicleCategoryEntity(1L, "Automotor"), new ModelEntity(1L, "Flex", new BrandEntity(1L, "Ford")), VehicleStatus.AVAILABLE, VehicleType.CAR, VehicleFuel.FLEX, new MediaEntity(1L, "pic.jpg", "image/jpeg", MediaType.JPG), "Uberlândia");
+        VehicleEntity entity = new VehicleEntity(1L, "V123",  "Red", 2022, 1233, "Description", new BigDecimal("10000"), new VehicleCategoryEntity(1L, "Automotor"), new ModelEntity(1L, "Flex", new BrandEntity(1L, "Ford")), VehicleStatus.AVAILABLE, VehicleType.CAR, VehicleFuel.FLEX, new MediaEntity(1L, "pic.jpg", "image/jpeg", MediaType.JPG), "Uberlândia", "GZK-8775", "1HGCM82633A123456", "76015901475");
         // Act
         String toString = entity.toString();
 
@@ -85,8 +85,8 @@ public class VehicleEntityTest {
     @Disabled
     public void testHashCode() {
         // Arrange
-        VehicleEntity entity1 = new VehicleEntity(1L, "V123",  "Red", 2022, 1233, "Description", new BigDecimal("10000"), new VehicleCategoryEntity(1L, "Automotor"), new ModelEntity(1L, "Flex", new BrandEntity(1L, "Ford")), VehicleStatus.AVAILABLE, VehicleType.CAR, VehicleFuel.FLEX, new MediaEntity(1L, "pic.jpg", "image/jpeg", MediaType.JPG), "Uberlândia");
-        VehicleEntity entity2 = new VehicleEntity(1L, "V123",  "Red", 2022, 1233, "Description", new BigDecimal("10000"), new VehicleCategoryEntity(1L, "Automotor"), new ModelEntity(1L, "Flex", new BrandEntity(1L, "Ford")), VehicleStatus.AVAILABLE, VehicleType.CAR, VehicleFuel.FLEX, new MediaEntity(1L, "pic.jpg", "image/jpeg", MediaType.JPG), "Uberlândia");
+        VehicleEntity entity1 = new VehicleEntity(1L, "V123",  "Red", 2022, 1233, "Description", new BigDecimal("10000"), new VehicleCategoryEntity(1L, "Automotor"), new ModelEntity(1L, "Flex", new BrandEntity(1L, "Ford")), VehicleStatus.AVAILABLE, VehicleType.CAR, VehicleFuel.FLEX, new MediaEntity(1L, "pic.jpg", "image/jpeg", MediaType.JPG), "Uberlândia", "GZK-8775", "1HGCM82633A123456", "76015901475");
+        VehicleEntity entity2 = new VehicleEntity(1L, "V123",  "Red", 2022, 1233, "Description", new BigDecimal("10000"), new VehicleCategoryEntity(1L, "Automotor"), new ModelEntity(1L, "Flex", new BrandEntity(1L, "Ford")), VehicleStatus.AVAILABLE, VehicleType.CAR, VehicleFuel.FLEX, new MediaEntity(1L, "pic.jpg", "image/jpeg", MediaType.JPG), "Uberlândia", "GZK-8775", "1HGCM82633A123456", "76015901475");
         // Act & Assert
         assertEquals(entity1.hashCode(), entity2.hashCode());
     }
@@ -94,9 +94,9 @@ public class VehicleEntityTest {
     @Test
     public void testEquals() {
         // Arrange
-        VehicleEntity entity1 = new VehicleEntity(1L, "V123",  "Red", 2022, 1233, "Description", new BigDecimal("10000"), new VehicleCategoryEntity(1L, "Automotor"), new ModelEntity(1L, "Flex", new BrandEntity(1L, "Ford")), VehicleStatus.AVAILABLE, VehicleType.CAR, VehicleFuel.FLEX, new MediaEntity(1L, "pic.jpg", "image/jpeg", MediaType.JPG), "Uberlândia");
-        VehicleEntity entity2 = new VehicleEntity(1L, "V123",  "Red", 2022, 1233, "Description", new BigDecimal("10000"), new VehicleCategoryEntity(1L, "Automotor"), new ModelEntity(1L, "Flex", new BrandEntity(1L, "Ford")), VehicleStatus.AVAILABLE, VehicleType.CAR, VehicleFuel.FLEX, new MediaEntity(1L, "pic.jpg", "image/jpeg", MediaType.JPG), "Uberlândia");
-        VehicleEntity entity3 = new VehicleEntity(2L, "V123",  "Red", 2022, 1233, "Description", new BigDecimal("10000"), new VehicleCategoryEntity(1L, "Automotor"), new ModelEntity(1L, "Flex", new BrandEntity(1L, "Ford")), VehicleStatus.AVAILABLE, VehicleType.CAR, VehicleFuel.FLEX, new MediaEntity(1L, "pic.jpg", "image/jpeg", MediaType.JPG), "Uberlândia");
+        VehicleEntity entity1 = new VehicleEntity(1L, "V123",  "Red", 2022, 1233, "Description", new BigDecimal("10000"), new VehicleCategoryEntity(1L, "Automotor"), new ModelEntity(1L, "Flex", new BrandEntity(1L, "Ford")), VehicleStatus.AVAILABLE, VehicleType.CAR, VehicleFuel.FLEX, new MediaEntity(1L, "pic.jpg", "image/jpeg", MediaType.JPG), "Uberlândia", "GZK-8775", "1HGCM82633A123456", "76015901475");
+        VehicleEntity entity2 = new VehicleEntity(1L, "V123",  "Red", 2022, 1233, "Description", new BigDecimal("10000"), new VehicleCategoryEntity(1L, "Automotor"), new ModelEntity(1L, "Flex", new BrandEntity(1L, "Ford")), VehicleStatus.AVAILABLE, VehicleType.CAR, VehicleFuel.FLEX, new MediaEntity(1L, "pic.jpg", "image/jpeg", MediaType.JPG), "Uberlândia", "GZK-8775", "1HGCM82633A123456", "76015901475");
+        VehicleEntity entity3 = new VehicleEntity(2L, "V123",  "Red", 2022, 1233, "Description", new BigDecimal("10000"), new VehicleCategoryEntity(1L, "Automotor"), new ModelEntity(1L, "Flex", new BrandEntity(1L, "Ford")), VehicleStatus.AVAILABLE, VehicleType.CAR, VehicleFuel.FLEX, new MediaEntity(1L, "pic.jpg", "image/jpeg", MediaType.JPG), "Uberlândia", "GZK-8775", "1HGCM82633A123456", "76015901475");
 
         // Act & Assert
         assertEquals(entity1, entity2);

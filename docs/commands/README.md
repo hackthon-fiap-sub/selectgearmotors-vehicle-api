@@ -13,9 +13,9 @@ docker rmi $(docker images -qa) -f
 sudo sysctl -w vm.max_map_count=262144
 
 
-docker build -t rogeriofontes/selectgearmotors-vehicle-api:v4 .
+docker build -t rogeriofontes/selectgearmotors-vehicle-api:v3 .
 docker login
-docker push rogeriofontes/selectgearmotors-vehicle-api:v4
+docker push rogeriofontes/selectgearmotors-vehicle-api:v3
 
 docker pull rogeriofontes/selectgearmotors-vehicle-api:v4
 docker run -p 9924:9924 rogeriofontes/selectgearmotors-vehicle-api:v4
