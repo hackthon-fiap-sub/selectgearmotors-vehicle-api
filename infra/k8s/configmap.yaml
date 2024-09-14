@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: selectgearmotors-vehicle-api-config
+data:
+  AWS_REGION: "us-east-1"
+  DATABASE_URL: "jdbc:postgresql://rds-selectgearmotors.cquezg8gsw7p.us-east-1.rds.amazonaws.com:5432/selectgearmotors-vehicle-db"
+  DATABASE_USERNAME: "postgres"
+  MAIL_HOST: "email-smtp.us-east-1.amazonaws.com"
+  MAIL_PORT: "587"
+  SWAGGER_API_URL: "https://192.168.100.31:9924/api"
+  ZIPKIN_URL: "http://54.82.102.109:9411/api/v2/spans"

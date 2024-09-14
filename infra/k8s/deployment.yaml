@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: selectgearmotors-vehicle-api
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: selectgearmotors-vehicle-api
+    spec:
+      containers:
+        - name: selectgearmotors-api
+          image: rogeriofontes/selectgearmotors-vehicle-api:v4
+          ports:
+            - containerPort: 9924
+          envFrom:
+            - configMapRef:
+                name: selectgearmotors-vehicle-api-config
+            - secretRef:
+                name: selectgearmotors-vehicle-api-secrets
