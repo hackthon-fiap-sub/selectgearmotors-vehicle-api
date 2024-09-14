@@ -9,6 +9,10 @@ server:
 spring:
   application:
     name: selectgearmotors-vehicle-api
+  main:
+    allow-circular-references: true
+---
+spring:
   config:
     activate:
       on-profile: dev
