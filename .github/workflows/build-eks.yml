@@ -48,6 +48,20 @@ jobs:
         run: |
           aws eks --region us-east-1 update-kubeconfig --name selectgearmotors-eks-cluster
 
+      - name: Create Kubernetes Secret YAML
+        run: |
+          echo "apiVersion: v1
+          kind: Secret
+          metadata:
+            name: selectgearmotors-vehicle-api-secrets
+          type: Opaque
+          stringData:
+            AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+            MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+            SECURITY_JWT_SECRET_KEY: ${{ secrets.SECURITY_JWT_SECRET_KEY }}" > infra/k8s/secrets.yaml
+
       - name: Applicator ConfigMap e Secrets
         run: |
           kubectl apply -f infra/k8s/configmap.yaml
