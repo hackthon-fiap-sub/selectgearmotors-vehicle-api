@@ -50,3 +50,16 @@ codigo
 manual-automatico
 local
 
+- name: Create Kubernetes Secret YAML
+  run: |
+  echo "apiVersion: v1
+  kind: Secret
+  metadata:
+  name: selectgearmotors-vehicle-api-secrets
+  type: Opaque
+  data:
+  AWS_ACCESS_KEY_ID: $(echo -n ${{ secrets.AWS_ACCESS_KEY_ID }} | base64)
+  AWS_SECRET_ACCESS_KEY: $(echo -n ${{ secrets.AWS_SECRET_ACCESS_KEY }} | base64)
+  DATABASE_PASSWORD: $(echo -n ${{ secrets.DATABASE_PASSWORD }} | base64)
+  MAIL_PASSWORD: $(echo -n ${{ secrets.MAIL_PASSWORD }} | base64)
+  SECURITY_JWT_SECRET_KEY: $(echo -n ${{ secrets.SECURITY_JWT_SECRET_KEY }} | base64)" > infra/k8s/secrets.yaml
