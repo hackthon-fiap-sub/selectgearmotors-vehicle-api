@@ -5,6 +5,9 @@ metadata:
   namespace: selectgearmotors-ns
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: selectgearmotors-vehicle-api
   template:
     metadata:
       labels:
