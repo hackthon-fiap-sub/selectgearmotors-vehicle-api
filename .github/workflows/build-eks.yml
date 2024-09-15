@@ -54,6 +54,7 @@ jobs:
           kind: Secret
           metadata:
             name: selectgearmotors-vehicle-api-secrets
+            namespace: selectgearmotors-ns
           type: Opaque
           stringData:
             AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
