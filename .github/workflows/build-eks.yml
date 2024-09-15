@@ -69,5 +69,5 @@ jobs:
 
       - name: Implantation da API no Cluster EKS
         run: |
-          kubectl apply -f infra/k8s/deployment.yaml -n selectgearsmotors-ns
+          kubectl apply -f infra/k8s/deployment.yaml -n selectgearmotors-ns
         working-directory: ${{ github.workspace }}
