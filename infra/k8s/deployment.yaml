@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: selectgearmotors-vehicle-api
-  namespace: selectgearsmotors-ns
+  namespace: selectgearmotors-ns
 spec:
   replicas: 1
   template:
