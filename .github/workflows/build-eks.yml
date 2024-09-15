@@ -11,16 +11,18 @@ jobs:
       - name: Checkout do codding
         uses: actions/checkout@v3
 
-      - name: Decode AWS credentials from Base64
-        run: |
-          echo ${{ secrets.AWS_ACCESS_KEY_ID }} | base64 --decode > /tmp/aws_access_key_id
-          echo ${{ secrets.AWS_SECRET_ACCESS_KEY }} | base64 --decode > /tmp/aws_secret_access_key
+      #- name: Decode AWS credentials from Base64
+        #run: |
+          #echo ${{ secrets.AWS_ACCESS_KEY_ID }} | base64 --decode > /tmp/aws_access_key_id
+          #echo ${{ secrets.AWS_SECRET_ACCESS_KEY }} | base64 --decode > /tmp/aws_secret_access_key
 
       - name: Configure AWS CLI
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          aws-access-key-id: $(cat aws_access_key_id.txt)
-          aws-secret-access-key: $(cat aws_secret_access_key.txt)
+          #aws-access-key-id: $(cat aws_access_key_id.txt)
+          #aws-secret-access-key: $(cat aws_secret_access_key.txt)
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
       - name: Installer Terraform
