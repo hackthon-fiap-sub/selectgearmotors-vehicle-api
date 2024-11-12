@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: selectgearmotors-api
-          image: rogeriofontes/selectgearmotors-vehicle-api:v4
+          image: rogeriofontes/selectgearmotors-vehicle-api:v7
           ports:
             - containerPort: 9924
           envFrom:
