@@ -72,8 +72,8 @@ public class VehicleResources {
     public ResponseEntity<VehicleResponse> update(@PathVariable("id") Long id, @Valid @RequestBody VehicleRequest request) {
         try {
             log.info("Chegada do objeto para ser alterado {}", request);
-            var product = productApiMapper.fromRequest(request);
-            Vehicle updated = updateVehiclePort.update(id, product);
+            var vehicle = productApiMapper.fromRequest(request);
+            Vehicle updated = updateVehiclePort.update(id, vehicle);
             if (updated == null) {
                 throw new ResourceFoundException("Produto não encontroado ao atualizar");
             }
@@ -82,6 +82,40 @@ public class VehicleResources {
             return ResponseEntity.ok(productResponse);
         } catch (Exception ex) {
             log.error(Constants.ERROR_EXCEPTION_RESOURCE + "-update: {}", ex.getMessage());
+            return ResponseEntity.ok().build();
+        }
+    }
+
+    @Operation(summary = "Update a Vehicle by Id", tags = {"products", "put"})
+    @ApiResponse(responseCode = "200", content = {
+            @Content(schema = @Schema(implementation = VehicleResources.class), mediaType = "application/json")})
+    @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema())})
+    @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema())})
+    @PutMapping("/{code}/reserved")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<String> updateReserved(@PathVariable("code") String code) {
+        try {
+            updateVehiclePort.updateReserved(code);
+            return ResponseEntity.ok().body("Status Atualizado");
+        } catch (Exception ex) {
+            log.error(Constants.ERROR_EXCEPTION_RESOURCE + "-updateReserved: {}", ex.getMessage());
+            return ResponseEntity.ok().build();
+        }
+    }
+
+    @Operation(summary = "Update a Vehicle by Id", tags = {"products", "put"})
+    @ApiResponse(responseCode = "200", content = {
+            @Content(schema = @Schema(implementation = VehicleResources.class), mediaType = "application/json")})
+    @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema())})
+    @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema())})
+    @PutMapping("/{code}/sold")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<String> updateSold(@PathVariable("code") String code) {
+        try {
+            updateVehiclePort.updateSold(code);
+            return ResponseEntity.ok().body("Status Atualizado");
+        } catch (Exception ex) {
+            log.error(Constants.ERROR_EXCEPTION_RESOURCE + "-updateReserved: {}", ex.getMessage());
             return ResponseEntity.ok().build();
         }
     }

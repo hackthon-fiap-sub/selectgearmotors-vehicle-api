@@ -10,5 +10,7 @@ public interface VehicleRepositoryPort {
     Vehicle findById(Long id);
     List<Vehicle> findAll();
     Vehicle update(Long id, Vehicle product);
+    void updateReserved(String code);
+    void updateSold(String code);
     Vehicle findByCode(String code);
 }

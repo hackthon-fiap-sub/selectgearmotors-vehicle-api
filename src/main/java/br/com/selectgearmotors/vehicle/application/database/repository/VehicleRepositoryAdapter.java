@@ -3,6 +3,7 @@ package br.com.selectgearmotors.vehicle.application.database.repository;
 import br.com.selectgearmotors.vehicle.application.database.mapper.VehicleMapper;
 import br.com.selectgearmotors.vehicle.core.domain.Vehicle;
 import br.com.selectgearmotors.vehicle.core.ports.out.VehicleRepositoryPort;
+import br.com.selectgearmotors.vehicle.infrastructure.entity.domain.VehicleStatus;
 import br.com.selectgearmotors.vehicle.infrastructure.entity.vehicle.VehicleEntity;
 import br.com.selectgearmotors.vehicle.infrastructure.repository.VehicleRepository;
 import lombok.AllArgsConstructor;
@@ -52,10 +53,7 @@ public class VehicleRepositoryAdapter implements VehicleRepositoryPort {
     @Override
     public Vehicle findById(Long id) {
         Optional<VehicleEntity> buVehicle = vehicleRepository.findById(id);
-        if (buVehicle.isPresent()) {
-            return vehicleMapper.fromEntityToModel(buVehicle.get());
-        }
-        return null;
+        return buVehicle.map(vehicleMapper::fromEntityToModel).orElse(null);
     }
 
     @Override
@@ -79,8 +77,20 @@ public class VehicleRepositoryAdapter implements VehicleRepositoryPort {
     }
 
     @Override
+    public void updateReserved(String code) {
+        vehicleRepository.updateStatus(VehicleStatus.RESERVED, code);
+    }
+
+    @Override
+    public void updateSold(String code) {
+        vehicleRepository.updateStatus(VehicleStatus.SOLD, code);
+    }
+
+    @Override
     public Vehicle findByCode(String code) {
         VehicleEntity byCode = vehicleRepository.findByCode(code);
         return vehicleMapper.fromEntityToModel(byCode);
     }
+
+
 }

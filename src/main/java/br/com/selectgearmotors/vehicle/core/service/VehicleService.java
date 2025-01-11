@@ -4,6 +4,7 @@ import br.com.selectgearmotors.vehicle.core.domain.Vehicle;
 import br.com.selectgearmotors.vehicle.application.api.exception.ResourceFoundException;
 import br.com.selectgearmotors.vehicle.core.ports.in.vehicle.*;
 import br.com.selectgearmotors.vehicle.core.ports.out.VehicleRepositoryPort;
+import br.com.selectgearmotors.vehicle.infrastructure.entity.domain.VehicleStatus;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,16 @@ public class VehicleService implements CreateVehiclePort, UpdateVehiclePort, Fin
     }
 
     @Override
+    public void updateReserved(String code) {
+        vehicleRepository.updateReserved(code);
+    }
+
+    @Override
+    public void updateSold(String code) {
+        vehicleRepository.updateSold(code);
+    }
+
+    @Override
     public Vehicle findById(Long id) {
         return vehicleRepository.findById(id);
     }
@@ -47,7 +58,7 @@ public class VehicleService implements CreateVehiclePort, UpdateVehiclePort, Fin
 
     @Override
     public List<Vehicle> findAll() {
-       return vehicleRepository.findAll();
+        return vehicleRepository.findAll();
     }
 
     @Override
